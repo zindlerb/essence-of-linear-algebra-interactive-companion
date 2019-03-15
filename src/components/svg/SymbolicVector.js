@@ -24,8 +24,8 @@ class SymbolicVector extends Component {
 		const vectorHeight = 100
 		const vectorWidth = 100
 
-		const noSpacingColumnWidths = []
-		const noSpacingColumnHeights = []
+		let itemWidth = 0
+		let itemHeight = 0
 		for (let colInd = 0; colInd < totalColumns; colInd++) {
 			let columnHeight = 0
 			let maxItemWidth = 0
@@ -33,18 +33,15 @@ class SymbolicVector extends Component {
 				// Iterate all rows in a column. Then move to next column.
 				const vectorItem = vector[rowInd][colInd]
 				const itemDimensions = getTextDimensions(vectorItem, FONT)
-				maxItemWidth = Math.max(maxItemWidth, itemDimensions.width)
-				columnHeight += itemDimensions.height
+				itemWidth = Math.max(itemWidth, itemDimensions.width)
+				itemHeight = itemDimensions.height // All heights are assumed to be the same.
 			}
-			noSpacingColumnWidths.push(maxItemWidth)
-			noSpacingColumnHeights.push(columnHeight)
 		}
 
 		// Content is everything inside the brackets and padding. The numbers or variables of the vector.
-		const itemWidth = Math.max(...noSpacingColumnWidths)
-		const itemHeight = noSpacingColumnHeights[0] // column heights assumed to be the same. Hence the [0].
-		let contentHeight = itemHeight + (COLUMN_SPACING * (totalRows - 1)) // totalColumns - 1 because the spacing is between each item.
-		let contentWidth = itemWidth + (ROW_SPACING * (totalColumns - 1))
+		// totalColumns - 1 because the spacing is between each item.
+		let contentHeight = (itemHeight * totalRows) + (COLUMN_SPACING * (totalRows - 1))
+		let contentWidth = (itemWidth * totalColumns) + (ROW_SPACING * (totalColumns - 1))
 		const totalWidth = (BRACKET_PADDING * 2) + contentWidth + (BRACKET_THICKNESS * 2)
 		const totalHeight = (BRACKET_PADDING * 2) + contentHeight + (BRACKET_THICKNESS * 2)
 
