@@ -1,28 +1,36 @@
+import PT from 'prop-types';
 import React, { Component } from 'react'
 import { getTextDimensions } from '../../utilities/general.js'
 
-const BRACKET_THICKNESS = 6 //
-const VECTOR_INSET = 15
-const BRACKET_PADDING = 5
+const BRACKET_THICKNESS = 4
+const VECTOR_INSET = 12
+const VERTICAL_BRACKET_PADDING = 4
+const HORIZONTAL_BRACKET_PADDING = 12
 const FONT = '30px sans-serif'
-const COLUMN_SPACING = 10
-const ROW_SPACING = 0
+const COLUMN_SPACING = 5
+const ROW_SPACING = 3
+const BASELINE_HEIGHT = 7 // Space between baseline and bottom of the text bounding box. Must be determined manually based on font size.
 
 class SymbolicVector extends Component {
+	static propTypes = {
+  	vector: PT.arrayOf( // Example: [[1, 2], [34, 6]]
+			PT.arrayOf(PT.oneOfType([
+    		PT.string,
+    		PT.number,
+    	])
+		)),
+		position: PT.shape({
+    	x: PT.number,
+    	y: PT.number
+  	}),
+		scale: PT.number
+	}
+
 	render() {
 		const { vector, position } = this.props;
 		const totalRows =  vector.length;
 		const totalColumns = vector[0].length;
-		// determine height
-		// determing width
-			 // dependent on size of numbers (decimals)
-
-		// svg text size - what is the height and width of this text
-		// row spacing, column spacing
-		// vector sides padding/ padding
 		const vectorItems = []
-		const vectorHeight = 100
-		const vectorWidth = 100
 
 		let itemWidth = 0
 		let itemHeight = 0
@@ -40,22 +48,23 @@ class SymbolicVector extends Component {
 
 		// Content is everything inside the brackets and padding. The numbers or variables of the vector.
 		// totalColumns - 1 because the spacing is between each item.
-		let contentHeight = (itemHeight * totalRows) + (COLUMN_SPACING * (totalRows - 1))
-		let contentWidth = (itemWidth * totalColumns) + (ROW_SPACING * (totalColumns - 1))
-		const totalWidth = (BRACKET_PADDING * 2) + contentWidth + (BRACKET_THICKNESS * 2)
-		const totalHeight = (BRACKET_PADDING * 2) + contentHeight + (BRACKET_THICKNESS * 2)
+		let contentHeight = (itemHeight * totalRows) + (ROW_SPACING * (totalRows - 1))
+		const totalHeight = (VERTICAL_BRACKET_PADDING * 2) + contentHeight + (BRACKET_THICKNESS * 2)
 
-		let textX = BRACKET_THICKNESS + BRACKET_PADDING
-		let textY = BRACKET_THICKNESS + BRACKET_PADDING
+		let contentWidth = (itemWidth * totalColumns) + (COLUMN_SPACING * (totalColumns - 1))
+		const totalWidth = (HORIZONTAL_BRACKET_PADDING * 2) + contentWidth + (BRACKET_THICKNESS * 2)
+
+		let textX = BRACKET_THICKNESS + HORIZONTAL_BRACKET_PADDING
+		let textY = BRACKET_THICKNESS + VERTICAL_BRACKET_PADDING
 		vector.forEach((row, rowInd) => {
 			row.forEach((item, colInd) => {
-				const { height } = getTextDimensions(item, FONT)
-				console.log('item:', item, 'height', height, 'itemHeigth', itemHeight)
+				const { height, width } = getTextDimensions(item, FONT)
+				console.log('item:', item, 'width', width, 'height', height)
 				vectorItems.push(
 					<text
 						key={`${rowInd}_${colInd}`}
-						x={textX + (colInd * (itemWidth + COLUMN_SPACING))}
-						y={(textY + height) + (rowInd * (itemHeight + ROW_SPACING))}
+						x={textX + (colInd * (itemWidth + COLUMN_SPACING)) + ((itemWidth - width) / 2)}
+						y={(textY + height) + (rowInd * (itemHeight + ROW_SPACING)) - BASELINE_HEIGHT}
 						style={{ font: FONT }}>
 						{item}
 					</text>

@@ -127,16 +127,15 @@ class App extends Component {
             Essence of Linear Algebra
           </a>
           Series by <a href="https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw">3Blue1Brown</a>.
-          If you liked their series or this companion make sure to support them on their
-          <a href="https://www.patreon.com/3blue1brown">Patreon page</a>.
+          If you liked their series or this companion make sure to support them on their <a href="https://www.patreon.com/3blue1brown">Patreon page</a>.
         </p>
 
         <h2>Vectors, what even are they? (<a href="https://www.youtube.com/watch?v=fNk_zzaMoSs">video link</a>)</h2>
 				<svg className="w-100 h-100">
 					<SymbolicVector
 						vector={[
-							[1, 92],
-							[2, 7]
+							[1],
+							[2]
 						]}
 						position={{
             	x: 100,

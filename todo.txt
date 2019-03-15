@@ -1,5 +1,17 @@
 [ ] component to render symbolic vectors
-  [ ] passable prop for if it is scrubbable or not
+	[ ] add prop types
+[ ] modify api of the graph renderer
+  [ ] prop-types
+  [ ] remove data class
+  [ ] remove state service
+	[ ] hook up symbolic and vector display
+  [ ] add grabby hand
+  [ ] clean up vector styles
+  [ ] add background grid disabling
+  [ ] snapping of points? yes.
+	[ ] add labeling of axis
+
+[ ] passable prop for if it is scrubbable or not
     [ ] I should probably have an onchange for each
 
     it is the responsibility of the caller to set the new value
@@ -16,15 +28,6 @@
     onDrag =>
            return new vector whole
 
-[ ] modify api of the graph renderer
-  [ ] prop-types
-  [ ] remove data class
-  [ ] remove state service
-  [ ] add labeling of axis
-  [ ] add grabby hand
-  [ ] clean up vector styles
-  [ ] add background grid disabling
-  [ ] snapping of points? yes.
 
 [ ] create regular example example
 [ ] create addition example
