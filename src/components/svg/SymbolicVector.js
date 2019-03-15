@@ -59,7 +59,6 @@ class SymbolicVector extends Component {
 		vector.forEach((row, rowInd) => {
 			row.forEach((item, colInd) => {
 				const { height, width } = getTextDimensions(item, FONT)
-				console.log('item:', item, 'width', width, 'height', height)
 				vectorItems.push(
 					<text
 						key={`${rowInd}_${colInd}`}

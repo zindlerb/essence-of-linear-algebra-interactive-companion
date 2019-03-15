@@ -1,19 +1,24 @@
-[ ] component to render symbolic vectors
-	[ ] add prop types
+[x] component to render symbolic vectors
+	[x] add prop types
 [ ] modify api of the graph renderer
   [ ] prop-types
-  [ ] remove data class
-  [ ] remove state service
-	[ ] hook up symbolic and vector display
-  [ ] add grabby hand
+  [x] remove data class
+  [x] remove state service
+	[x] hook up symbolic and vector display
+	[ ] make cursor allways display while dragging
+	[ ] scale grid. Make the drag snap to grid lines
+	[ ] disallow dragging off of the edge
   [ ] clean up vector styles
+		[ ] try to match the 3blue1brown
   [ ] add background grid disabling
-  [ ] snapping of points? yes.
+		[ ] need to have ticks
 	[ ] add labeling of axis
+	[ ] add grabby hand
 
 [ ] passable prop for if it is scrubbable or not
-    [ ] I should probably have an onchange for each
-
+	[ ] onhover for data points
+		general onhover that returns the col and row
+  [ ] I should probably have an onchange for each
     it is the responsibility of the caller to set the new value
     [
       { onChange: (newVal) => , value },

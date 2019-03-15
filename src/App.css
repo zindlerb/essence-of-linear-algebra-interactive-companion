@@ -85,3 +85,7 @@ body {
 
 .renderer {
 }
+
+.move {
+	cursor: move;
+}

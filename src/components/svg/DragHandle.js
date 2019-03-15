@@ -1,7 +1,7 @@
 import React from 'react'
-import dragManager from './drag_manager.js'
+import dragManager from 'Utilities/drag_manager.js'
 
-const DragHandle = ({ onDrag, pos, r, initialValues }) => {
+const DragHandle = ({ onDrag, pos, r, initialValues, gridScale, onDragStart, onDragEnd }) => {
 	return (
 		<circle
 			className="u-moveable"
@@ -10,11 +10,13 @@ const DragHandle = ({ onDrag, pos, r, initialValues }) => {
 			r={r || 5}
 			fill="tomato"
 			onMouseDown={e => {
+				onDragStart()
 				dragManager.start(e, {
 					initialValues,
 					onDrag(_, { dy, dx }) {
-						onDrag({ dy, dx }, this.initialValues)
+						onDrag({ dx: Math.round(dx / gridScale),  dy: Math.round(dy / gridScale) }, this.initialValues)
 					},
+					onEnd: onDragEnd
 				})
 			}}
 		/>

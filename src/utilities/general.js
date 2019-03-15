@@ -1,5 +1,4 @@
 import $ from 'jquery'
-import { Pos } from '../data_types.js'
 
 export function isPointWithinRect(point, rect) {
 	return (
@@ -14,15 +13,6 @@ export function getRectMidpoint({ x, y, width, height }) {
 	return {
 		x: x + width / 2,
 		y: y + height / 2,
-	}
-}
-
-export const getOffsetPos = (ev, fromGlobalOffset = false) => {
-	if (fromGlobalOffset) {
-		return new Pos(ev.clientX, ev.clientY)
-	} else {
-		const rect = ev.target.getBoundingClientRect()
-		return new Pos(ev.clientX - rect.x, ev.clientY - rect.y)
 	}
 }
 
