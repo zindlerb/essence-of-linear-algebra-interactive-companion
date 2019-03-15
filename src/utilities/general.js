@@ -41,14 +41,17 @@ export function getRandomColor() {
 	return color
 }
 
-export const getTextBoxDimensions = (text, padding) => {
-	const sizingEl = $(`<div>${text}</div>`).css({
-		visibility: 'hidden',
-		maxWidth: 200,
-		position: 'absolute',
+export const getTextDimensions = (text, fontStr) => {
+	const svg = $('<svg></svg>').css({
+  	visibility: 'hidden',
+		position: 'absolute'
 	})
-	$('body').prepend(sizingEl)
-	const size = { width: sizingEl.width() + padding * 2, height: sizingEl.height() + padding * 2 }
-	sizingEl.remove()
+	const textEl = $(`<text>${text}</div>`).css({
+		font: fontStr,
+	})
+	svg.append(textEl)
+	$('body').prepend(svg)
+	const size = textEl[0].getBoundingClientRect()
+	svg.remove()
 	return size
 }

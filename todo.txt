@@ -1,0 +1,33 @@
+[ ] component to render symbolic vectors
+  [ ] passable prop for if it is scrubbable or not
+    [ ] I should probably have an onchange for each
+
+    it is the responsibility of the caller to set the new value
+    [
+      { onChange: (newVal) => , value },
+    ]
+
+    or just:
+    [
+      [10, 10],
+      [20, 20],
+    ]
+
+    onDrag =>
+           return new vector whole
+
+[ ] modify api of the graph renderer
+  [ ] prop-types
+  [ ] remove data class
+  [ ] remove state service
+  [ ] add labeling of axis
+  [ ] add grabby hand
+  [ ] clean up vector styles
+  [ ] add background grid disabling
+  [ ] snapping of points? yes.
+
+[ ] create regular example example
+[ ] create addition example
+[ ] create multiplication
+[ ] clean up text revise
+[ ] Watch video 2

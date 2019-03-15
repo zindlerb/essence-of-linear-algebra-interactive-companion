@@ -10,7 +10,9 @@ body, html, #root {
 }
 
 body {
-
+  width: 700px;
+  padding: 40px 25px 130px 25px;
+  margin: auto;
 }
 
 .graph-container {
