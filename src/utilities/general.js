@@ -1,12 +1,6 @@
 import $ from 'jquery'
 import { Pos } from '../data_types.js'
 
-export const genId = () => {
-	return Math.random()
-		.toString()
-		.replace('.', '')
-}
-
 export function isPointWithinRect(point, rect) {
 	return (
 		point.x > rect.x &&
@@ -55,3 +49,5 @@ export const getTextDimensions = (text, fontStr) => {
 	svg.remove()
 	return size
 }
+
+export const genId = () => Math.random().toString().replace('.', '')
