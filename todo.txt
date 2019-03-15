@@ -5,11 +5,15 @@
   [x] remove data class
   [x] remove state service
 	[x] hook up symbolic and vector display
-	[ ] make cursor allways display while dragging
-	[ ] scale grid. Make the drag snap to grid lines
+	[x] make cursor allways display while dragging
+	[x] scale grid. Make the drag snap to grid lines
 	[ ] disallow dragging off of the edge
   [ ] clean up vector styles
+		[ ] grabby hand
 		[ ] try to match the 3blue1brown
+		[ ] dot should signify when the user hovers
+		[ ] dot should not be so close to arrow head
+		[ ] color options for vectors
   [ ] add background grid disabling
 		[ ] need to have ticks
 	[ ] add labeling of axis
@@ -32,7 +36,6 @@
 
     onDrag =>
            return new vector whole
-
 
 [ ] create regular example example
 [ ] create addition example
