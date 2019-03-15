@@ -5,6 +5,7 @@ import './App.css'
 import { Vec, VectorGraphData } from './data_types.js'
 import SymbolicVector from './components/svg/SymbolicVector.js'
 import stateManager from './utilities/state_manager.js'
+import CoordinateGraph from './components/svg/CoordinateGraph'
 
 class App extends Component {
 	constructor() {
@@ -41,6 +42,11 @@ class App extends Component {
 							y: 100
 						}}
 					/>
+					{
+						this.state.vectorGraphs.map(graphData => {
+							return <CoordinateGraph graphData={graphData} size={300} gridSpacing={15} />
+						})
+					}
 				</svg>
 			</div>
 		)
