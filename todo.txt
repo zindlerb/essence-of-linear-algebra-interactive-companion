@@ -1,24 +1,41 @@
+[ ] move vector into position for example 1
+[ ] add text
+[ ] do addition example
+[ ] add text
+[ ] add scaling feature
+[ ] do multiplication example
+[ ] have option without grid line
+[ ] add labels to axis
+[ ] unit vectors
+[ ] hover to highligth unit vector
+[ ] scrubbable numbers on the symbolic vector
+
+
+
+
+
 [x] component to render symbolic vectors
 	[x] add prop types
 [ ] modify api of the graph renderer
-  [ ] prop-types
   [x] remove data class
   [x] remove state service
 	[x] hook up symbolic and vector display
 	[x] make cursor allways display while dragging
 	[x] scale grid. Make the drag snap to grid lines
-	[ ] disallow dragging off of the edge
+	[x] fix the 0 and 1 on coordinate grid
+	[x] disallow dragging off of the edge
+	[ ] add background grid disabling
+		ticks - match 3 brown
   [ ] clean up vector styles
-		[ ] grabby hand
+		[x] grabby hand
 		[ ] try to match the 3blue1brown
-		[ ] dot should signify when the user hovers
-		[ ] dot should not be so close to arrow head
-		[ ] color options for vectors
-  [ ] add background grid disabling
+		[x] dot should signify when the user hovers
+			[x] get slightly bigger
+		[x] dot should not be so close to arrow head
+
 		[ ] need to have ticks
 	[ ] add labeling of axis
-	[ ] add grabby hand
-
+	[ ] Add scaling handle
 [ ] passable prop for if it is scrubbable or not
 	[ ] onhover for data points
 		general onhover that returns the col and row
@@ -36,8 +53,8 @@
 
     onDrag =>
            return new vector whole
-
 [ ] create regular example example
+	[ ] line up symbolid and graph - make sure graph is big enough
 [ ] create addition example
 [ ] create multiplication
 [ ] clean up text revise

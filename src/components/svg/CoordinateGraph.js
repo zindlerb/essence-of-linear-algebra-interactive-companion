@@ -1,14 +1,11 @@
 import _ from 'lodash'
 import cx from 'classnames'
 import React, { Component } from 'react'
-import { genId } from 'Utilities/general'
+import { ifTrue } from 'Utilities/general'
 import DragHandle from 'Components/svg/DragHandle'
 
 const GRAY = '#e0e0e0'
 const DARK_GRAY = '#6d6d6d'
-
-// Move control of grid size from external to internal
-// call it grid scaling
 
 class CoordinateGraph extends Component {
 	constructor(props) {
@@ -18,10 +15,10 @@ class CoordinateGraph extends Component {
 		}
 	}
 	render() {
-		let { size, gridSpacing, position, vectorData } = this.props
+		let { size, gridSpacing, vectors, vectorOptions = [], className } = this.props
+		const { isDragging } = this.state
 		size = size || 100
-		const coordinatePlaneOrigin = { x: size / 2, y: size / 2 }
-		// should be able to do all this coordinate plane stuff with transforms
+		const coordinatePlaneOrigin = { x: size / 2, y: size / 2 } // shoule all the coordinate plane stuff happen with transforms?
 		gridSpacing = gridSpacing || 5
 
 		let currentX = 0
@@ -38,57 +35,62 @@ class CoordinateGraph extends Component {
 		})
 
 		return (
-			<g
-				className={cx({ move: this.state.isDragging })}
-				transform={`translate(${position.x}, ${position.y})`}>
-				<rect x={0} y={0} width={size} height={size} fill="transparent"/>
-				{gridLines}
-				{vectorData.map(({ vector, onDrag }, ind) => {
-					const [[vecX], [vecY]] = vector
-					const normalizedVecX = vecX * gridSpacing
-					const normalizedVecY = vecY * gridSpacing
+			<svg className={className} width={size} height={size}>
+				<g className={cx({ 'c-grabbing': isDragging })}>
+					<rect x={0} y={0} width={size} height={size} fill="transparent"/>
+					{gridLines}
+					{vectors.map((vector, ind) => {
+						const { color, onMove, origin = { x: 0, y: 0 } } = (vectorOptions[ind] || {})
+						const [[vecX], [vecY]] = vector
+						const normalizedVecX = vecX * gridSpacing
+						const normalizedVecY = vecY * gridSpacing
+						const adjustedOriginX = coordinatePlaneOrigin.x + (origin.x * gridSpacing)
+						const adjustedOriginY = coordinatePlaneOrigin.y - (origin.y * gridSpacing)
 
-					const id = genId()
-					return (
-						<g key={ind}>
-							<defs>
-								<marker
-									id={id}
-									markerWidth="10"
-									markerHeight="10"
-									refX="0"
-									refY="3"
-									orient="auto"
-									markerUnits="strokeWidth"
-									viewBox="0 0 20 20">
-									<path d="M0,0 L0,6 L9,3 z" fill="black" />
-								</marker>
-							</defs>
-							<line
-								markerEnd={`url(#${id})`}
-								x1={coordinatePlaneOrigin.x}
-								y1={coordinatePlaneOrigin.y}
-								x2={coordinatePlaneOrigin.x + normalizedVecX}
-								y2={coordinatePlaneOrigin.y - normalizedVecY}
-								stroke="black"
-								strokeWidth={4}
-							/>
-							<DragHandle
-								onDragStart={() => {
-                	this.setState({ isDragging: true })
-								}}
-								onDragEnd={() => {
-                  this.setState({ isDragging: false })
-								}}
-								gridScale={gridSpacing}
-								initialValues={{ vecX, vecY }}
-								pos={{ x: coordinatePlaneOrigin.x + normalizedVecX, y: coordinatePlaneOrigin.y - normalizedVecY }}
-								onDrag={onDrag}
-							/>
-						</g>
-					)
-				})}
-			</g>
+						return (
+							<g key={ind}>
+								<line
+									x1={adjustedOriginX}
+									y1={adjustedOriginY}
+									x2={adjustedOriginX + normalizedVecX}
+									y2={adjustedOriginY - normalizedVecY}
+									stroke={color}
+									strokeWidth={4}
+								/>
+								{
+									ifTrue(onMove, () => (
+										<DragHandle
+											onDragStart={() => {
+			                	this.setState({ isDragging: true })
+											}}
+											onDragEnd={() => {
+			                  this.setState({ isDragging: false })
+											}}
+											gridScale={gridSpacing}
+											initialValues={{ vecX, vecY }}
+											pos={{ x: adjustedOriginX + normalizedVecX, y: adjustedOriginY - normalizedVecY }}
+											onDrag={({ dx, dy }, { vecX, vecY }) => {
+												const newX = vecX + dx
+												const newY =  vecY - dy // why do I need to do this? bug?
+												if (
+													newX <= ((size/2) / gridSpacing) &&
+													newX >= (-(size/2) / gridSpacing) &&
+													newY <= ((size/2) / gridSpacing) &&
+													newY >= (-(size/2) / gridSpacing)
+												) {
+													onMove({ newY, newX })
+												}
+											}}
+											graphSize={size}
+											isDragging={isDragging}
+										/>
+									))
+								}
+							</g>
+						)
+					})}
+				</g>
+			</svg>
 		)
 	}
 }

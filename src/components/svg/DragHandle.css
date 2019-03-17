@@ -1,0 +1,5 @@
+.drag-handle {
+	transition-property: r;
+  transition-duration: 4s;
+  transition-delay: 2s;
+}

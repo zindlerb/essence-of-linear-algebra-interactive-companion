@@ -1,5 +1,30 @@
 body {
-  margin: 0;
-  padding: 0;
   font-family: sans-serif;
+	max-width: 900px;
+  padding: 40px 25px 130px 25px;
+  margin: auto;
 }
+
+body, #root {
+	height: 100%;
+}
+
+.c-grab {
+	cursor: grab;
+}
+
+.c-grabbing {
+	cursor: grabbing;
+}
+
+.c-default {
+  cursor: default;
+}
+/*
+* {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+*/

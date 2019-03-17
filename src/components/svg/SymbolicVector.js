@@ -19,15 +19,11 @@ class SymbolicVector extends Component {
     		PT.number,
     	])
 		)),
-		position: PT.shape({
-    	x: PT.number,
-    	y: PT.number
-  	}),
 		scale: PT.number
 	}
 
 	render() {
-		const { vector, position } = this.props;
+		const { vector, position, className } = this.props;
 		const totalRows =  vector.length;
 		const totalColumns = vector[0].length;
 		const vectorItems = []
@@ -72,15 +68,17 @@ class SymbolicVector extends Component {
 		})
 
 		return (
-			<g fill="black">
-				<rect className="left-top" x={0} y={0} width={VECTOR_INSET} height={BRACKET_THICKNESS} />
-				<rect className="left-side" x={0} y={0} width={BRACKET_THICKNESS} height={totalHeight} />
-				<rect className="left-bottom" x={0} y={totalHeight - BRACKET_THICKNESS} width={VECTOR_INSET} height={BRACKET_THICKNESS} />
-				<rect className="right-top" x={totalWidth - VECTOR_INSET} y={0} width={VECTOR_INSET} height={BRACKET_THICKNESS} />
-				<rect className="right-side" x={totalWidth - BRACKET_THICKNESS} y={0} width={BRACKET_THICKNESS} height={totalHeight} />
-				<rect className="right-bottom" x={totalWidth - VECTOR_INSET} y={totalHeight - BRACKET_THICKNESS} width={VECTOR_INSET} height={BRACKET_THICKNESS} />
-				{vectorItems}
-			</g>
+			<svg className={className} width={totalWidth} height={totalHeight}>
+				<g fill="black">
+					<rect className="left-top" x={0} y={0} width={VECTOR_INSET} height={BRACKET_THICKNESS} />
+					<rect className="left-side" x={0} y={0} width={BRACKET_THICKNESS} height={totalHeight} />
+					<rect className="left-bottom" x={0} y={totalHeight - BRACKET_THICKNESS} width={VECTOR_INSET} height={BRACKET_THICKNESS} />
+					<rect className="right-top" x={totalWidth - VECTOR_INSET} y={0} width={VECTOR_INSET} height={BRACKET_THICKNESS} />
+					<rect className="right-side" x={totalWidth - BRACKET_THICKNESS} y={0} width={BRACKET_THICKNESS} height={totalHeight} />
+					<rect className="right-bottom" x={totalWidth - VECTOR_INSET} y={totalHeight - BRACKET_THICKNESS} width={VECTOR_INSET} height={BRACKET_THICKNESS} />
+					{vectorItems}
+				</g>
+			</svg>
 		)
 	}
 }

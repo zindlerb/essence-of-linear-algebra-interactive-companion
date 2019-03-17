@@ -1,0 +1,5 @@
+export const BLUE = '#357EDD'
+export const PINK = '#D5008F'
+export const PURPLE = '#A463F2'
+export const GREEN = '#19A974'
+export const NEAR_BLACK = '#111111'

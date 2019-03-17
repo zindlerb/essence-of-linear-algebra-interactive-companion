@@ -40,4 +40,36 @@ export const getTextDimensions = (text, fontStr) => {
 	return size
 }
 
+export const clamp = (number, lower, upper) => {
+	if (number > upper) {
+    return upper
+	} else if (number < lower) {
+		return lower
+	} else {
+  	return number
+	}
+}
+
 export const genId = () => Math.random().toString().replace('.', '')
+
+export const vectorAdd = (vecA, vecB) => {
+	return vecA.map((row, rowInd) => {
+		return row.map((item, colInd) => {
+			return item + vecB[rowInd][colInd]
+		})
+	})
+}
+
+export const vectorScale = (vec, scalar) => {
+  return vec.map((row) => {
+		return row.map((item) => {
+			return item * scalar
+		})
+	})
+}
+
+export const ifTrue = (conditional, trueFunc) => {
+	if (conditional) {
+		return trueFunc()
+	}
+}
