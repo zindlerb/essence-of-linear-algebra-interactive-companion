@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { BLUE } from 'Root/constants/colors'
+import { BLUE, SHADOW_BLUE } from 'Root/constants/colors'
 import SymbolicVector from 'Components/svg/SymbolicVector'
 import CoordinateGraph from 'Components/svg/CoordinateGraph'
 import { vectorScale } from 'Utilities/general'
+import Scrubber from 'Components/Scrubber'
+import './VectorScalingContainer.css'
 
 class VectorScalingContainer extends Component {
 	constructor(props) {
@@ -16,14 +18,15 @@ class VectorScalingContainer extends Component {
 	render() {
 		const { vector, scalar } = this.state
 		return (
-			<div className="flex mv4">
+			<div className="vector-scaling-container flex mv4 w-100 justify-between">
 				<CoordinateGraph
 					vectors={[
-						vector
+						vector,
+						vectorScale(vector, scalar)
 					]}
 					vectorOptions={[
 						{
-							color: BLUE,
+							color: SHADOW_BLUE,
 							onMove: ({ newX, newY }) => {
 								this.setState({
                 	vector: [
@@ -32,6 +35,9 @@ class VectorScalingContainer extends Component {
 									]
 								})
 							}
+						},
+						{
+							color: BLUE,
 						}
 					]}
 					size={400}
@@ -42,9 +48,21 @@ class VectorScalingContainer extends Component {
 						className="ph2"
 						vector={vector}
 					/>
-					<div>*</div>
-					<div>{scalar}</div>
-					<div>=</div>
+					<div className="operator mh2">*</div>
+					<Scrubber
+						className="scalar"
+						onChange={(scalar) => this.setState({ scalar })}>
+						{scalar}
+					</Scrubber>
+					<div className="operator mh2">=</div>
+					<SymbolicVector
+						className="ph2"
+						vector={[
+							[`${scalar} * ${vector[0][0]}`],
+							[`${scalar} * ${vector[1][0]}`],
+						]}
+					/>
+					<div className="operator mh2">=</div>
 					<SymbolicVector
 						className="ph2"
 						vector={vectorScale(vector, scalar)}

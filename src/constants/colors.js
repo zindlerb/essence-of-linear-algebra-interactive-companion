@@ -1,4 +1,5 @@
-export const BLUE = '#357EDD'
+export const BLUE = 'rgb(53, 126, 221)'
+export const SHADOW_BLUE = 'rgb(53, 126, 221, .3)'
 export const PINK = '#D5008F'
 export const PURPLE = '#A463F2'
 export const GREEN = '#19A974'

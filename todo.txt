@@ -1,14 +1,23 @@
-[ ] move vector into position for example 1
-[ ] add text
-[ ] do addition example
-[ ] add text
-[ ] add scaling feature
-[ ] do multiplication example
+[x] move vector into position for example 1
+[x] add text
+[x] do addition example
+[x] add text
+[x] add scaling feature
+[x] do multiplication example
+[x] add scrubbing for number
+[ ] fix up styling and spacing (addition)
 [ ] have option without grid line
+	[ ] match the no grid line examples from 3b1b
 [ ] add labels to axis
 [ ] unit vectors
 [ ] hover to highligth unit vector
 [ ] scrubbable numbers on the symbolic vector
+[ ] fix the jankiness of multiplication example
+[ ] favicon [1, 2] of vector
+[ ] title on page
+[ ] add timestamps to each section
+[ ] revise text
+[ ] assemble td's for span example
 
 
 
