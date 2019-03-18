@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { BLUE } from 'Root/constants/colors'
+import { BLUE, X_COMPONENT_COLOR, Y_COMPONENT_COLOR } from 'Root/constants/colors'
 import SymbolicVector from 'Components/svg/SymbolicVector'
 import CoordinateGraph from 'Components/svg/CoordinateGraph'
 
@@ -16,12 +16,14 @@ class VectorIntroductionContainer extends Component {
 		return (
 			<div className="flex mv4">
 				<CoordinateGraph
+					showGridlines={false}
 					vectors={[
 						vector
 					]}
 					vectorOptions={[
 						{
 							color: BLUE,
+							showComponentVectors: true,
 							onMove: ({ newX, newY }) => {
 								this.setState({
                 	vector: [
@@ -32,12 +34,16 @@ class VectorIntroductionContainer extends Component {
 							}
 						}
 					]}
-					size={400}
-					gridSpacing={20}
+					size={420}
+					gridSpacing={30}
 				/>
 				<SymbolicVector
 					className="ph4 w4"
-					vector={vector}
+					vector={[
+						[<tspan fill={X_COMPONENT_COLOR}>{vector[0][0]}</tspan>],
+						[<tspan fill={Y_COMPONENT_COLOR}>{vector[1][0]}</tspan>]
+					]}
+					stringVector={vector}
 				/>
 			</div>
 		)

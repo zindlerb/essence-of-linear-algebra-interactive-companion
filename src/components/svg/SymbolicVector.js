@@ -1,9 +1,10 @@
+import cx from 'classnames'
 import PT from 'prop-types';
 import React, { Component } from 'react'
 import { getTextDimensions } from '../../utilities/general.js'
 
-const BRACKET_THICKNESS = 4
-const VECTOR_INSET = 12
+const BRACKET_THICKNESS = 3
+const VECTOR_INSET = 10
 const VERTICAL_BRACKET_PADDING = 4
 const HORIZONTAL_BRACKET_PADDING = 12
 const FONT = '30px sans-serif'
@@ -13,17 +14,13 @@ const BASELINE_HEIGHT = 7 // Space between baseline and bottom of the text bound
 
 class SymbolicVector extends Component {
 	static propTypes = {
-  	vector: PT.arrayOf( // Example: [[1, 2], [34, 6]]
-			PT.arrayOf(PT.oneOfType([
-    		PT.string,
-    		PT.number,
-    	])
-		)),
+  	vector: PT.arrayOf(PT.arrayOf(PT.any)), // Example: [[1, 2], [34, 6]]
 		scale: PT.number
 	}
 
 	render() {
-		const { vector, position, className } = this.props;
+		const { vector, className = null, scale = 1, options = {}, stringVector = null } = this.props;
+		const { color = 'black' } = options
 		const totalRows =  vector.length;
 		const totalColumns = vector[0].length;
 		const vectorItems = []
@@ -35,7 +32,10 @@ class SymbolicVector extends Component {
 			let maxItemWidth = 0
 			for (let rowInd = 0; rowInd < totalRows; rowInd++) {
 				// Iterate all rows in a column. Then move to next column.
-				const vectorItem = vector[rowInd][colInd]
+				let vectorItem = vector[rowInd][colInd]
+				if (stringVector) { // combine dimension getting into 1 part
+					vectorItem = stringVector[rowInd][colInd]
+				}
 				const itemDimensions = getTextDimensions(vectorItem, FONT)
 				itemWidth = Math.max(itemWidth, itemDimensions.width)
 				itemHeight = itemDimensions.height // All heights are assumed to be the same.
@@ -54,7 +54,12 @@ class SymbolicVector extends Component {
 		let textY = BRACKET_THICKNESS + VERTICAL_BRACKET_PADDING
 		vector.forEach((row, rowInd) => {
 			row.forEach((item, colInd) => {
-				const { height, width } = getTextDimensions(item, FONT)
+				let dimensionItem = item
+				if (stringVector) {
+					dimensionItem = stringVector[rowInd][colInd]
+				}
+				const { height, width } = getTextDimensions(dimensionItem, FONT)
+
 				vectorItems.push(
 					<text
 						key={`${rowInd}_${colInd}`}
@@ -68,8 +73,8 @@ class SymbolicVector extends Component {
 		})
 
 		return (
-			<svg className={className} width={totalWidth} height={totalHeight}>
-				<g fill="black">
+			<svg className={cx(className, 'u-unselectable')} width={totalWidth * scale} height={totalHeight * scale}>
+				<g fill={color} transform={`scale(${scale})`}>
 					<rect className="left-top" x={0} y={0} width={VECTOR_INSET} height={BRACKET_THICKNESS} />
 					<rect className="left-side" x={0} y={0} width={BRACKET_THICKNESS} height={totalHeight} />
 					<rect className="left-bottom" x={0} y={totalHeight - BRACKET_THICKNESS} width={VECTOR_INSET} height={BRACKET_THICKNESS} />

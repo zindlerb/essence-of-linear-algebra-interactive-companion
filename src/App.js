@@ -7,6 +7,8 @@ import CoordinateGraph from 'Components/svg/CoordinateGraph'
 import VectorIntroductionContainer from 'Root/containers/VectorIntroductionContainer'
 import VectorAdditionContainer from 'Root/containers/VectorAdditionContainer'
 import VectorScalingContainer from 'Root/containers/VectorScalingContainer'
+import BasisVectorContainer from 'Root/containers/BasisVectorContainer'
+import AlternativeBasisVectorContainer from 'Root/containers/AlternativeBasisVectorContainer'
 
 class App extends Component {
 	render() {
@@ -24,17 +26,22 @@ class App extends Component {
 
 				<h2>Vectors, what even are they? (<a href="https://www.youtube.com/watch?v=fNk_zzaMoSs">video link</a>)</h2>
 
-				<h3>Basic Vector</h3>
+				<h3>Basic Vector (<a href="https://youtu.be/fNk_zzaMoSs">0:00</a>)</h3>
 				<p>
 					Below is an example of a basic vector. Drag the handle to move the vector around the coordinate plane.
 				</p>
 				<VectorIntroductionContainer/>
-				<h3>Vector Addition</h3>
+				<h3>Vector Addition (<a href="https://youtu.be/fNk_zzaMoSs?t=287">4:47</a>)</h3>
 				<p>Below is an example of adding two vectors.</p>
 				<VectorAdditionContainer/>
-				<h3>Vector Multiplication (Scaling)</h3>
+				<h3>Vector Multiplication (<a href="https://youtu.be/fNk_zzaMoSs?t=412">6:52</a>)</h3>
 				<p>Below is an example of multiplying two vectors.</p>
 				<VectorScalingContainer/>
+				<h2>Linear combinations, span, and basis vectors (<a href="https://www.youtube.com/watch?v=k7RM-ot2NWY&t=456s">video link</a>)</h2>
+				<h3>Basis Vectors (<a href="https://youtu.be/k7RM-ot2NWY?t=32">0:32</a>)</h3>
+				<BasisVectorContainer/>
+				<h3>Alternative Basis Vectors (<a href="https://youtu.be/k7RM-ot2NWY?t=32">0:32</a>)</h3>
+				<AlternativeBasisVectorContainer/>
 			</div>
 		)
 	}

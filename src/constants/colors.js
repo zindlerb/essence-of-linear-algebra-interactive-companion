@@ -1,6 +1,11 @@
 export const BLUE = 'rgb(53, 126, 221)'
-export const SHADOW_BLUE = 'rgb(53, 126, 221, .3)'
+export const SHADOW_BLUE = '#bfd8f9' // apply opacity inside
 export const PINK = '#D5008F'
 export const PURPLE = '#A463F2'
+export const SHADOW_PURPLE = 'rgb(199, 178, 224)'
 export const GREEN = '#19A974'
 export const NEAR_BLACK = '#111111'
+export const X_COMPONENT_COLOR = 'rgb(131, 194, 100)'
+export const Y_COMPONENT_COLOR = 'rgb(227, 106, 97)'
+export const X_COMPONENT_COLOR_SHADOW = '#c1e6b7'
+export const Y_COMPONENT_COLOR_SHADOW = '#f8c1c0'

@@ -12,15 +12,17 @@ class DragHandle extends Component {
 	}
 
 	render() {
-  	const { onDrag, pos, initialValues, gridScale, onDragStart, onDragEnd, isDragging, graphSize } = this.props
+  	const { onDrag, pos, initialValues, gridScale, onDragStart, onDragEnd, isDragging, graphSize, color } = this.props
 		const { isHovering } = this.state
 		return (
 			<circle
 				className={cx('drag-handle', { 'c-grab': !isDragging, 'c-grabbing': isDragging })}
 				cx={pos.x}
 				cy={pos.y}
-				r={(isHovering || isDragging) ? 9 : 6}
-				fill="tomato"
+				r={(isHovering || isDragging) ? 10 : 9}
+				fill={color}
+				stroke="white"
+				strokeWidth={3}
 				onMouseEnter={() => this.setState({ isHovering: true })}
 				onMouseLeave={() => this.setState({ isHovering: false })}
 				onMouseDown={e => {

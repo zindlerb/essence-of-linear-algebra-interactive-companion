@@ -21,10 +21,13 @@ class VectorScalingContainer extends Component {
 			<div className="vector-scaling-container flex mv4 w-100 justify-between">
 				<CoordinateGraph
 					vectors={[
+						vectorScale(vector, scalar),
 						vector,
-						vectorScale(vector, scalar)
 					]}
 					vectorOptions={[
+						{
+							color: BLUE,
+						},
 						{
 							color: SHADOW_BLUE,
 							onMove: ({ newX, newY }) => {
@@ -36,9 +39,6 @@ class VectorScalingContainer extends Component {
 								})
 							}
 						},
-						{
-							color: BLUE,
-						}
 					]}
 					size={400}
 					gridSpacing={20}

@@ -1,3 +1,12 @@
+
+    fill: rgb(14, 125, 228);
+    stroke: white;
+    stroke-width: 3px;
+    r: 9;
+
+hovering the symbolic vector lowlights all of the other symbols
+
+
 [x] move vector into position for example 1
 [x] add text
 [x] do addition example
@@ -5,19 +14,24 @@
 [x] add scaling feature
 [x] do multiplication example
 [x] add scrubbing for number
-[ ] fix up styling and spacing (addition)
-[ ] have option without grid line
-	[ ] match the no grid line examples from 3b1b
-[ ] add labels to axis
-[ ] unit vectors
-[ ] hover to highligth unit vector
-[ ] scrubbable numbers on the symbolic vector
-[ ] fix the jankiness of multiplication example
-[ ] favicon [1, 2] of vector
-[ ] title on page
+[x] fix up styling and spacing (addition)
+[x] have option without grid line
+	[x] match the no grid line examples from 3b1b
+[x] add labels to axis
+[x] unit vectors
+[x] favicon [1, 2] of vector
+	[x] figure out how to make a good looking favicon
+[x] title on page
+
 [ ] add timestamps to each section
 [ ] revise text
 [ ] assemble td's for span example
+[ ] hover to highligth unit vector
+[ ] scrubbable numbers on the symbolic vector
+[ ] fix the jankiness of multiplication example
+[ ] tab to cycle through selected vector?
+
+
 
 
 
@@ -68,3 +82,19 @@
 [ ] create multiplication
 [ ] clean up text revise
 [ ] Watch video 2
+
+CoordinateGraph
+	spanVectors={[
+		vec1,
+		vec2
+	]}
+	// low light all dots on hover
+	onHoverSpanDot{({x, y}) => {
+		// lowlight all dots
+	}}
+
+
+<SvgContainer> // padding attribute. use transform, takes size
+<SvgContainer>
+
+<SpanGrid basisVectors={} size={} onHoverSpanDot={} /> // overlaid onto coordinate graph

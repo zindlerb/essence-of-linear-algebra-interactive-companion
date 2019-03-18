@@ -1,11 +1,13 @@
 import _ from 'lodash'
 import cx from 'classnames'
 import React, { Component } from 'react'
+import { X_COMPONENT_COLOR, Y_COMPONENT_COLOR } from 'Root/constants/colors'
 import { ifTrue } from 'Utilities/general'
 import DragHandle from 'Components/svg/DragHandle'
 
 const GRAY = '#e0e0e0'
-const DARK_GRAY = '#6d6d6d'
+const BLACK = '#333333'
+const SVG_PADDING = 20
 
 class CoordinateGraph extends Component {
 	constructor(props) {
@@ -15,7 +17,7 @@ class CoordinateGraph extends Component {
 		}
 	}
 	render() {
-		let { size, gridSpacing, vectors, vectorOptions = [], className } = this.props
+		let { size, gridSpacing, vectors, className=null, vectorOptions=[], showGridlines=true, showLabels=true } = this.props
 		const { isDragging } = this.state
 		size = size || 100
 		const coordinatePlaneOrigin = { x: size / 2, y: size / 2 } // shoule all the coordinate plane stuff happen with transforms?
@@ -26,21 +28,62 @@ class CoordinateGraph extends Component {
 
 		let gridLines = []
 
-		_.times(Math.floor(size / gridSpacing) + 1, ind => {
-			let color = ind === Math.floor(size / gridSpacing) / 2 ? DARK_GRAY : GRAY
-			gridLines.push(<line key={`${ind}_v`} x1={currentX} y1={0} x2={currentX} y2={size} stroke={color} />)
-			gridLines.push(<line key={`${ind}_y`} x1={0} y1={currentY} x2={size} y2={currentY} stroke={color} />)
-			currentX += gridSpacing
-			currentY += gridSpacing
-		})
+		if (showGridlines) {
+			_.times(Math.floor(size / gridSpacing) + 1, ind => {
+				let color = ind === Math.floor(size / gridSpacing) / 2 ? BLACK : GRAY
+				gridLines.push(<line key={`${ind}_v`} x1={currentX} y1={0} x2={currentX} y2={size} stroke={color} />)
+				gridLines.push(<line key={`${ind}_y`} x1={0} y1={currentY} x2={size} y2={currentY} stroke={color} />)
+				currentX += gridSpacing
+				currentY += gridSpacing
+			})
+		} else {
+			const TICK_SIZE = 4
+			_.times(Math.floor(size / gridSpacing) + 1, ind => {
+				// Vertical Tick
+				gridLines.push(
+					<line
+						key={`${ind}_x`}
+						x1={currentX}
+						y1={(size/2) - TICK_SIZE}
+						x2={currentX}
+						y2={(size/2) + TICK_SIZE}
+						stroke={BLACK}
+						strokeWidth={2}
+					/>
+				)
+
+				// Horizontal Tick
+				gridLines.push(
+					<line
+						key={`${ind}_y`}
+						x1={(size/2) - TICK_SIZE}
+						y1={currentY}
+						x2={(size/2) + TICK_SIZE}
+						y2={currentY}
+						stroke={BLACK}
+						strokeWidth={2}
+					/>
+				)
+				currentX += gridSpacing
+				currentY += gridSpacing
+			})
+			gridLines.push(<line key={`origin_line_x`} x1={0} y1={size/2} x2={size} y2={size/2} stroke={BLACK} strokeWidth={2} />)
+			gridLines.push(<line key={`origin_line_y`} x1={size/2} y1={0} x2={size/2} y2={size} stroke={BLACK} strokeWidth={2} />)
+		}
 
 		return (
-			<svg className={className} width={size} height={size}>
-				<g className={cx({ 'c-grabbing': isDragging })}>
+			<svg className={cx(className, 'u-unselectable')} width={size + (SVG_PADDING * 2)} height={size + (SVG_PADDING * 2)}>
+				{
+        	ifTrue(showLabels, () => ([
+						<text style={{ font: 'italic 20px serif' }} x={(size/2) + SVG_PADDING - 3} y={9}>x</text>,
+						<text style={{ font: 'italic 20px serif' }} x={size + SVG_PADDING + 10} y={(size/2) + SVG_PADDING + 3}>y</text>
+					]))
+				}
+				<g className={cx({ 'c-grabbing': isDragging })} transform={`translate(${SVG_PADDING}, ${SVG_PADDING})`}>
 					<rect x={0} y={0} width={size} height={size} fill="transparent"/>
 					{gridLines}
 					{vectors.map((vector, ind) => {
-						const { color, onMove, origin = { x: 0, y: 0 } } = (vectorOptions[ind] || {})
+						const { color, onMove, origin = { x: 0, y: 0 }, showComponentVectors=false } = (vectorOptions[ind] || {})
 						const [[vecX], [vecY]] = vector
 						const normalizedVecX = vecX * gridSpacing
 						const normalizedVecY = vecY * gridSpacing
@@ -57,6 +100,28 @@ class CoordinateGraph extends Component {
 									stroke={color}
 									strokeWidth={4}
 								/>
+								{
+									ifTrue(showComponentVectors, () => ([
+										// X component
+										<line
+											x1={adjustedOriginX}
+											y1={adjustedOriginY}
+											x2={adjustedOriginX + normalizedVecX}
+											y2={adjustedOriginY}
+											stroke={X_COMPONENT_COLOR}
+											strokeWidth={4}
+										/>,
+										// Y component
+										<line
+											x1={adjustedOriginX + normalizedVecX}
+											y1={adjustedOriginY}
+											x2={adjustedOriginX + normalizedVecX}
+											y2={adjustedOriginY - normalizedVecY}
+											stroke={Y_COMPONENT_COLOR}
+											strokeWidth={4}
+										/>
+									]))
+								}
 								{
 									ifTrue(onMove, () => (
 										<DragHandle
@@ -81,6 +146,7 @@ class CoordinateGraph extends Component {
 													onMove({ newY, newX })
 												}
 											}}
+											color={color}
 											graphSize={size}
 											isDragging={isDragging}
 										/>
