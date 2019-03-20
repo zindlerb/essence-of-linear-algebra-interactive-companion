@@ -9,11 +9,24 @@ import VectorAdditionContainer from 'Root/containers/VectorAdditionContainer'
 import VectorScalingContainer from 'Root/containers/VectorScalingContainer'
 import BasisVectorContainer from 'Root/containers/BasisVectorContainer'
 import AlternativeBasisVectorContainer from 'Root/containers/AlternativeBasisVectorContainer'
+import SpanContainer from 'Root/containers/SpanContainer'
+import globalStateService from 'Utilities/global_state_service'
 
 class App extends Component {
+	constructor(props) {
+		super(props)
+		this.state = {}
+	}
+
+	componentDidMount() {
+		globalStateService.registerComponent(this)
+	}
+
 	render() {
+		const { globalCursor } = this.state
+		console.log('globalCursor', globalCursor)
 		return (
-			<div className="App w-100 h-100">
+			<div style={{ cursor: globalCursor ? `${globalCursor}` : null }} className="App w-100 h-100">
 				<h1>Essence of Linear Algebra Interactive Companion</h1>
 				<p>
 					Below are some interactive examples that can be paired with the
@@ -40,8 +53,10 @@ class App extends Component {
 				<h2>Linear combinations, span, and basis vectors (<a href="https://www.youtube.com/watch?v=k7RM-ot2NWY&t=456s">video link</a>)</h2>
 				<h3>Basis Vectors (<a href="https://youtu.be/k7RM-ot2NWY?t=32">0:32</a>)</h3>
 				<BasisVectorContainer/>
-				<h3>Alternative Basis Vectors (<a href="https://youtu.be/k7RM-ot2NWY?t=32">0:32</a>)</h3>
+				<h3>Alternative Basis Vectors (<a href="https://youtu.be/k7RM-ot2NWY?t=109">1:49</a>)</h3>
 				<AlternativeBasisVectorContainer/>
+				<h3>Span (<a href="https://youtu.be/k7RM-ot2NWY?t=209">3:29</a>)</h3>
+				<SpanContainer />
 			</div>
 		)
 	}

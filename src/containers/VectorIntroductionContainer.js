@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BLUE, X_COMPONENT_COLOR, Y_COMPONENT_COLOR } from 'Root/constants/colors'
 import SymbolicVector from 'Components/svg/SymbolicVector'
 import CoordinateGraph from 'Components/svg/CoordinateGraph'
+import SvgContainer from 'Components/svg/SvgContainer'
 
 class VectorIntroductionContainer extends Component {
 	constructor(props) {
@@ -15,28 +16,30 @@ class VectorIntroductionContainer extends Component {
 		const { vector } = this.state
 		return (
 			<div className="flex mv4">
-				<CoordinateGraph
-					showGridlines={false}
-					vectors={[
-						vector
-					]}
-					vectorOptions={[
-						{
-							color: BLUE,
-							showComponentVectors: true,
-							onMove: ({ newX, newY }) => {
-								this.setState({
-                	vector: [
-										[newX],
-										[newY]
-									]
-								})
+				<SvgContainer size={420}>
+					<CoordinateGraph
+						showGridlines={false}
+						vectors={[
+							vector
+						]}
+						vectorOptions={[
+							{
+								color: BLUE,
+								showComponentVectors: true,
+								onMove: ({ newX, newY }) => {
+									this.setState({
+	                	vector: [
+											[newX],
+											[newY]
+										]
+									})
+								}
 							}
-						}
-					]}
-					size={420}
-					gridSpacing={30}
-				/>
+						]}
+						size={420}
+						gridSpacing={30}
+					/>
+				</SvgContainer>
 				<SymbolicVector
 					className="ph4 w4"
 					vector={[

@@ -4,6 +4,7 @@ import SymbolicVector from 'Components/svg/SymbolicVector'
 import CoordinateGraph from 'Components/svg/CoordinateGraph'
 import { vectorScale } from 'Utilities/general'
 import Scrubber from 'Components/Scrubber'
+import SvgContainer from 'Components/svg/SvgContainer'
 import './VectorScalingContainer.css'
 
 class VectorScalingContainer extends Component {
@@ -19,30 +20,32 @@ class VectorScalingContainer extends Component {
 		const { vector, scalar } = this.state
 		return (
 			<div className="vector-scaling-container flex mv4 w-100 justify-between">
-				<CoordinateGraph
-					vectors={[
-						vectorScale(vector, scalar),
-						vector,
-					]}
-					vectorOptions={[
-						{
-							color: BLUE,
-						},
-						{
-							color: SHADOW_BLUE,
-							onMove: ({ newX, newY }) => {
-								this.setState({
-                	vector: [
-										[newX],
-										[newY]
-									]
-								})
-							}
-						},
-					]}
-					size={400}
-					gridSpacing={20}
-				/>
+				<SvgContainer size={400}>
+					<CoordinateGraph
+						vectors={[
+							vectorScale(vector, scalar),
+							vector,
+						]}
+						vectorOptions={[
+							{
+								color: BLUE,
+							},
+							{
+								color: SHADOW_BLUE,
+								onMove: ({ newX, newY }) => {
+									this.setState({
+	                	vector: [
+											[newX],
+											[newY]
+										]
+									})
+								}
+							},
+						]}
+						size={400}
+						gridSpacing={20}
+					/>
+				</SvgContainer>
 				<div className="flex items-center">
 					<SymbolicVector
 						className="ph2"

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import SymbolicVector from 'Components/svg/SymbolicVector'
+import SvgContainer from 'Components/svg/SvgContainer'
 import CoordinateGraph from 'Components/svg/CoordinateGraph'
 import { I_HAT, J_HAT } from 'Root/constants.js'
 import Scrubber from 'Components/Scrubber'
@@ -23,23 +24,25 @@ class BasisVectorContainer extends Component {
 		return (
 			<div className="vector-addition-container mv4 ">
 				<div className="flex items-center">
-					<CoordinateGraph
-						showLabels={false}
-						vectors={[
-							vectorW,
-							vectorV,
-							vectorScale(vectorW, scaleW),
-							vectorScale(vectorV, scaleV)
-						]}
-						vectorOptions={[
-							{ color: SHADOW_BLUE },
-							{ color: SHADOW_PURPLE },
-							{ color: BLUE },
-							{ color: PURPLE },
-						]}
-						size={420}
-						gridSpacing={30}
-					/>
+					<SvgContainer size={420}>
+						<CoordinateGraph
+							showLabels={false}
+							vectors={[
+								vectorW,
+								vectorV,
+								vectorScale(vectorW, scaleW),
+								vectorScale(vectorV, scaleV)
+							]}
+							vectorOptions={[
+								{ color: SHADOW_BLUE },
+								{ color: SHADOW_PURPLE },
+								{ color: BLUE },
+								{ color: PURPLE },
+							]}
+							size={420}
+							gridSpacing={30}
+						/>
+					</SvgContainer>
 					<div className="ml4">
 						<div className="f3 flex items-center mb3">
 							w <span className="mh2">=</span> <SymbolicVector vector={vectorW} options={{ color: BLUE }} />

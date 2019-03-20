@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import SvgContainer from 'Components/svg/SvgContainer'
 import SymbolicVector from 'Components/svg/SymbolicVector'
 import CoordinateGraph from 'Components/svg/CoordinateGraph'
 import { I_HAT, J_HAT } from 'Root/constants.js'
@@ -18,21 +19,23 @@ class BasisVectorContainer extends Component {
 		return (
 			<div className="vector-addition-container mv4 ">
 				<div className="flex items-center">
-					<CoordinateGraph
-						showLabels={false}
-						vectors={[
-							[[1], [0]],
-							[[0], [1]],
-							vector,
-						]}
-						vectorOptions={[
-							{ color: X_COMPONENT_COLOR_SHADOW },
-							{ color: Y_COMPONENT_COLOR_SHADOW },
-							{ color: BLUE, showComponentVectors: true },
-						]}
-						size={420}
-						gridSpacing={30}
-					/>
+					<SvgContainer size={420}>
+						<CoordinateGraph
+							showLabels={false}
+							vectors={[
+								[[1], [0]],
+								[[0], [1]],
+								vector,
+							]}
+							vectorOptions={[
+								{ color: X_COMPONENT_COLOR_SHADOW },
+								{ color: Y_COMPONENT_COLOR_SHADOW },
+								{ color: BLUE, showComponentVectors: true },
+							]}
+							size={420}
+							gridSpacing={30}
+						/>
+					</SvgContainer>
 					<div className="f1 ml4 flex items-center">
 						<span
 							style={{ color: X_COMPONENT_COLOR }}>

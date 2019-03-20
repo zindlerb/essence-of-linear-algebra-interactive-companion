@@ -1,4 +1,5 @@
 import $ from 'jquery'
+import _ from 'lodash'
 
 export function isPointWithinRect(point, rect) {
 	return (
@@ -73,3 +74,55 @@ export const ifTrue = (conditional, trueFunc) => {
 		return trueFunc()
 	}
 }
+
+export const interpolateColors = (colorA, colorB, numberOfSteps) => {
+	const RED = 0
+	const GREEN = 1
+	const BLUE = 2
+
+	const rStepSize = (colorB[RED] - colorA[RED]) / numberOfSteps
+	const gStepSize = (colorB[GREEN] - colorA[GREEN]) / numberOfSteps
+	const bStepSize = (colorB[BLUE] - colorA[BLUE]) / numberOfSteps
+
+	const rgbSteps = []
+	_.times(numberOfSteps, (stepCount) => {
+		rgbSteps.push([
+			colorA[RED] + (rStepSize * stepCount),
+			colorA[GREEN] + (gStepSize * stepCount),
+			colorA[BLUE] + (bStepSize * stepCount),
+		])
+	})
+
+	return rgbSteps
+}
+
+// x = 100
+// y = 100
+// gridSize = 100
+// gridSpacing = 10
+
+// desired result
+// { x: 5, y: -5 }
+export const svgToVectorPoint = (x, y, gridSize, gridSpacing) => {
+	const svgToVectorTranslation = -(gridSize/2)
+	const svgToVectorScaling = 1 / (gridSize / gridSpacing)
+
+	return {
+  	x: (x + svgToVectorTranslation) * svgToVectorScaling,
+		y: -((y + svgToVectorTranslation) * svgToVectorScaling)
+	}
+}
+
+window.svgToVectorPoint = svgToVectorPoint
+
+export const vectorToSvgPoint = (x, y, gridSize, gridSpacing) => {
+	const vectorToSvgTranslation = (gridSize/2)
+	const vectorToSvgScaling = (gridSize / gridSpacing)
+
+	return {
+  	x: (x * vectorToSvgScaling) + vectorToSvgTranslation,
+		y: ((-y * vectorToSvgScaling) + vectorToSvgTranslation)
+	}
+}
+
+window.vectorToSvgPoint = vectorToSvgPoint

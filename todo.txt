@@ -1,8 +1,35 @@
+rgb(216, 155, 234)
+rgb(146, 191, 216)
+
+span some angles produce decimal values
+
+[ ] get the span dots to render correctly
+	[ ] split up components into seperate ones
+	[ ] create global state store - global cursor
+	[ ] get the correct ordering of rendering
+		grid
+		dots
+		vec
+[ ] mimic the cool span dot color
+[ ] get hover working
+	[ ] lowlight all other ones when hovering
+	[ ] event listenders
+	[ ] lowlight vectors
+	[ ] show the vector that belongs there
+	[ ] show symbolic side
+[ ] vertical does not work for the span
+[ ] rename coordinate graph
+	[ ] VectorsWithGrid or something
+
 
     fill: rgb(14, 125, 228);
     stroke: white;
     stroke-width: 3px;
     r: 9;
+color a:
+#B24BD0
+color b:
+#39778B
 
 hovering the symbolic vector lowlights all of the other symbols
 
@@ -98,3 +125,6 @@ CoordinateGraph
 <SvgContainer>
 
 <SpanGrid basisVectors={} size={} onHoverSpanDot={} /> // overlaid onto coordinate graph
+
+Deeper issues:
+	flipped y axis?

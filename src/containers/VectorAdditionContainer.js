@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SymbolicVector from 'Components/svg/SymbolicVector'
 import CoordinateGraph from 'Components/svg/CoordinateGraph'
+import SvgContainer from 'Components/svg/SvgContainer'
 import { BLUE, GREEN, PURPLE } from 'Root/constants/colors'
 import { vectorAdd } from 'Utilities/general'
 import './VectorAdditionContainer.css'
@@ -81,65 +82,71 @@ class VectorAdditionContainer extends Component {
 					</div>
 				</div>
 				<div className="flex items-center">
-					<CoordinateGraph
-						showLabels={false}
-						vectors={[
-							vectorA
-						]}
-						vectorOptions={[
-							{
-								color: BLUE,
-								onMove: ({ newX, newY }) => {
-									this.setState({
-        	        	vectorA: [
-											[newX],
-											[newY]
-										]
-									})
+					<SvgContainer size={210}>
+						<CoordinateGraph
+							showLabels={false}
+							vectors={[
+								vectorA
+							]}
+							vectorOptions={[
+								{
+									color: BLUE,
+									onMove: ({ newX, newY }) => {
+										this.setState({
+	        	        	vectorA: [
+												[newX],
+												[newY]
+											]
+										})
+									}
 								}
-							}
-						]}
-						size={210}
-						gridSpacing={15}
-					/>
+							]}
+							size={210}
+							gridSpacing={15}
+						/>
+					</SvgContainer>
 					<div className="operator mh3">+</div>
-					<CoordinateGraph
-						showLabels={false}
-						vectors={[
-							vectorB
-						]}
-						vectorOptions={[
-							{
-								color: GREEN,
-								onMove: ({ newX, newY }) => {
-									this.setState({
-        	        	vectorB: [
-											[newX],
-											[newY]
-										]
-									})
+					<SvgContainer size={210}>
+						<CoordinateGraph
+							showLabels={false}
+							vectors={[
+								vectorB
+							]}
+							vectorOptions={[
+								{
+									color: GREEN,
+									onMove: ({ newX, newY }) => {
+										this.setState({
+	        	        	vectorB: [
+												[newX],
+												[newY]
+											]
+										})
+									}
 								}
-							}
-						]}
-						size={210}
-						gridSpacing={15}
-					/>
+							]}
+							size={210}
+							gridSpacing={15}
+						/>
+					</SvgContainer>
 					<div className="operator mh3">=</div>
-					<CoordinateGraph
-						showLabels={false}
-						vectors={[
-							vectorA,
-							vectorB,
-							vectorAdd(vectorA, vectorB)
-						]}
-						vectorOptions={[
-							{ color: BLUE },
-							{ color: GREEN, origin: { x: vectorA[0][0], y: vectorA[1][0] } },
-							{ color: PURPLE }
-						]}
-						size={210}
-						gridSpacing={15}
-					/>
+					<SvgContainer size={210}>
+						<CoordinateGraph
+							showLabels={false}
+							vectors={[
+								vectorA,
+								vectorB,
+								vectorAdd(vectorA, vectorB)
+							]}
+							vectorOptions={[
+								{ color: BLUE },
+								{ color: GREEN, origin: { x: vectorA[0][0], y: vectorA[1][0] } },
+								{ color: PURPLE }
+							]}
+							size={210}
+							gridSpacing={15}
+						/>
+					</SvgContainer>
 				</div>
 			</div>
 		)
