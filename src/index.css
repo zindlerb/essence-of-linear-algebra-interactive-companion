@@ -33,6 +33,11 @@ body, #root {
 .interactive {
   color: #00a3b7
 }
+
+.pointer-none {
+	pointer-events: none;
+}
+
 /*
 * {
 	-webkit-user-select: none;

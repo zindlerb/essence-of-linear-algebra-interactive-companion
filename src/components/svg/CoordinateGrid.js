@@ -3,7 +3,12 @@ import React from 'react'
 import { ifTrue } from 'Utilities/general'
 import { GRAY, BLACK } from 'Root/constants/colors'
 
-const CoordinateGrid = ({ size, gridSpacing, showGridlines=true, showLabels=true }) => {
+const getTransformString = (transformMatrix, gridSize) => {
+	const [vec1Str, vec2Str] = transformMatrix.map(([x, y]) => `${x}, ${y}`)
+	return `translate(${gridSize/2}, ${gridSize/2}) matrix(${vec1Str}, ${vec2Str}, 0, 0) translate(-${gridSize/2}, -${gridSize/2})`
+}
+
+const CoordinateGrid = ({ size, gridSpacing, showGridlines=true, showLabels=true, transform=null }) => {
 	let currentX = 0
 	let currentY = 0
 	let gridLines = []
@@ -50,7 +55,7 @@ const CoordinateGrid = ({ size, gridSpacing, showGridlines=true, showLabels=true
 	}
 
 	return (
-		<g>
+		<g transform={transform ? getTransformString(transform, size) : null}>
 			<rect x={0} y={0} width={size} height={size} fill="transparent"/>
 			{
        	ifTrue(showLabels, () => ([

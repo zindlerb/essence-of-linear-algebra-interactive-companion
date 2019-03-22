@@ -1,5 +1,68 @@
+[x] transform for coordinate grid
+[ ] scrubbers for symbolic vector
+[ ] show basis vectors
+	[ ] transform for vector renderer.
+	[ ] hide vector param
+[ ]	watch video 4 again and think about additions
+[ ] complete video 4
+[ ] add text to sections
+	[ ] add unofficial
+[ ] clean up fonts and designs
+[ ] hovering on span dot should fade things in and out
+[ ] check for jank
+[ ] graceful mobile handling
+	[ ] gifs that say it is mobile only
+[ ] link to my twitter
+[ ]
+
+
+At video 4 clean up whole post
+DesignSpace
+TweakSpace
+DesignTweak
+TweakSpace
+
+Permute
+
+	- load in variable
+		array of fonts
+		array of colors
+	- tie variable to array of strings
+	- each variable has a tag
+		css property associated with variable,
+	- then each of the different properties can be scubbed and favorites can be saved
+	- some things want to be sets - this color with this color?
+		- not essential.
+	- for some things you just want a number
+	- relational things like (complementary?)
+Chrome extension?
+
+
+[ ] fonts
+[ ]
+
+
+
+
+
+
+
+
+What operations is the user doing?
+How can these be made simpler?
+
+
+
+To resolve hovering issues:
+	- mouse move at root of svg - use target element to determing (is this vector, is this span doc, is this other..)
+	- or
+
+
+
 rgb(216, 155, 234)
 rgb(146, 191, 216)
+introduce pointVector operations?
+point vector is a good name
 
 span some angles produce decimal values
 

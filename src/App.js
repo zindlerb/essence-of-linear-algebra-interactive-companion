@@ -10,6 +10,7 @@ import VectorScalingContainer from 'Root/containers/VectorScalingContainer'
 import BasisVectorContainer from 'Root/containers/BasisVectorContainer'
 import AlternativeBasisVectorContainer from 'Root/containers/AlternativeBasisVectorContainer'
 import SpanContainer from 'Root/containers/SpanContainer'
+import LinearTransformationContainer from 'Root/containers/LinearTransformationContainer'
 import globalStateService from 'Utilities/global_state_service'
 
 class App extends Component {
@@ -24,7 +25,6 @@ class App extends Component {
 
 	render() {
 		const { globalCursor } = this.state
-		console.log('globalCursor', globalCursor)
 		return (
 			<div style={{ cursor: globalCursor ? `${globalCursor}` : null }} className="App w-100 h-100">
 				<h1>Essence of Linear Algebra Interactive Companion</h1>
@@ -38,7 +38,6 @@ class App extends Component {
 				</p>
 
 				<h2>Vectors, what even are they? (<a href="https://www.youtube.com/watch?v=fNk_zzaMoSs">video link</a>)</h2>
-
 				<h3>Basic Vector (<a href="https://youtu.be/fNk_zzaMoSs">0:00</a>)</h3>
 				<p>
 					Below is an example of a basic vector. Drag the handle to move the vector around the coordinate plane.
@@ -50,6 +49,7 @@ class App extends Component {
 				<h3>Vector Multiplication (<a href="https://youtu.be/fNk_zzaMoSs?t=412">6:52</a>)</h3>
 				<p>Below is an example of multiplying two vectors.</p>
 				<VectorScalingContainer/>
+
 				<h2>Linear combinations, span, and basis vectors (<a href="https://www.youtube.com/watch?v=k7RM-ot2NWY&t=456s">video link</a>)</h2>
 				<h3>Basis Vectors (<a href="https://youtu.be/k7RM-ot2NWY?t=32">0:32</a>)</h3>
 				<BasisVectorContainer/>
@@ -57,6 +57,9 @@ class App extends Component {
 				<AlternativeBasisVectorContainer/>
 				<h3>Span (<a href="https://youtu.be/k7RM-ot2NWY?t=209">3:29</a>)</h3>
 				<SpanContainer />
+
+				<h2>Linear transformations and matrices (<a href="https://youtu.be/kYB8IZa5AuE">video link</a>)</h2>
+				<LinearTransformationContainer />
 			</div>
 		)
 	}

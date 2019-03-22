@@ -1,3 +1,4 @@
+import cx from 'classnames'
 import React, { Component } from 'react'
 import { X_COMPONENT_COLOR, Y_COMPONENT_COLOR } from 'Root/constants/colors'
 import { ifTrue } from 'Utilities/general'
@@ -28,6 +29,7 @@ class GeometricVectors extends Component {
 				return (
 					<g key={ind}>
 						<line
+							className={cx({ 'pointer-none': !onMove })}
 							x1={adjustedOriginX}
 							y1={adjustedOriginY}
 							x2={adjustedOriginX + normalizedVecX}
@@ -38,6 +40,7 @@ class GeometricVectors extends Component {
 						{
 							ifTrue(showComponentVectors, () => ([
 								<line
+									className="pointer-none"
 									key="x_component"
 									x1={adjustedOriginX}
 									y1={adjustedOriginY}
@@ -47,6 +50,7 @@ class GeometricVectors extends Component {
 									strokeWidth={4}
 								/>,
 								<line
+									className="pointer-none"
 									key="y_component"
 									x1={adjustedOriginX + normalizedVecX}
 									y1={adjustedOriginY}

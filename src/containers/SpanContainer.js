@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import SvgContainer from 'Components/svg/SvgContainer'
 import SymbolicVector from 'Components/svg/SymbolicVector'
@@ -6,7 +7,10 @@ import GeometricVectors from 'Components/svg/GeometricVectors'
 import { I_HAT, J_HAT } from 'Root/constants.js'
 import Scrubber from 'Components/Scrubber'
 import SpanGrid from 'Components/svg/SpanGrid'
-import { vectorScale } from 'Utilities/general'
+import {
+  vectorScale, ifTrue, pointVectorMatrixMultiply, invert2By2Matrix,
+  vectorsToMatrix, determinant2By2Matrix
+} from 'Utilities/general'
 import { BLUE, SHADOW_BLUE, PURPLE, SHADOW_PURPLE, GREEN } from 'Root/constants/colors'
 import './SpanContainer.css'
 
@@ -17,8 +21,8 @@ class SpanContainer extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-    	vectorW: [[3], [3]],
-			vectorV: [[-2], [-2]],
+    	vectorW: [[1], [3]],
+			vectorV: [[0], [-2]],
 
 			exampleVector: null
 		}
@@ -33,7 +37,6 @@ class SpanContainer extends Component {
 			{ color: PURPLE, onMove: ({ newX, newY }) => this.setState({ vectorV: [[newX], [newY]] }) },
 		]
 
-		console.log('exampleVector', exampleVector)
 		if (exampleVector) {
 			vectors = [vectorW, vectorV, exampleVector]
 			vectorOptions = [
@@ -45,7 +48,7 @@ class SpanContainer extends Component {
 
 		return (
 			<div className="span-container mv4 ">
-				<div className="flex items-center">
+				<div className="flex">
 					<SvgContainer size={GRID_SIZE}>
 						<CoordinateGrid
 							size={GRID_SIZE}
@@ -57,7 +60,7 @@ class SpanContainer extends Component {
 							size={GRID_SIZE}
 							gridSpacing={GRID_SPACING}
 							spanVectors={[vectorW, vectorV]}
-							onEnterSpanDot={(x, y) => { this.setState({ exampleVector: [[x], [y]] }) }}
+							onEnterSpanDot={(exampleVector) => { this.setState({ exampleVector }) }}
 							onLeaveSpanDot={() => { this.setState({ exampleVector: null }) }}
 						/>
 						<GeometricVectors
@@ -67,13 +70,47 @@ class SpanContainer extends Component {
 							vectorOptions={vectorOptions}
 						/>
 					</SvgContainer>
-					<div className="ml4">
+					<div className="ml4 pt4">
 						<div className="f3 flex items-center mb3">
 							w <span className="mh2">=</span> <SymbolicVector vector={vectorW} options={{ color: BLUE }} />
 						</div>
 						<div className="f3 flex items-center mb3">
 							v <span className="mh2">=</span> <SymbolicVector vector={vectorV} options={{ color: PURPLE }} />
 						</div>
+						{ifTrue(exampleVector, () => {
+							const matrix = vectorsToMatrix(vectorW, vectorV)
+							const determinant = determinant2By2Matrix(matrix)
+							let scaleW, scaleV
+
+							if (determinant === 0) {
+								if (_.isEqual(matrix, [[0, 0], [0, 0]])) {
+									scaleW = 0
+									scaleV = 0
+								} else {
+									// I'm sure there is a better way to do this. :/
+									scaleW = 0
+									if (vectorV[0][0] !== 0) {
+										scaleV = exampleVector[0][0] / vectorV[0][0]
+									} else if (vectorV[1][0] !== 0) {
+										scaleV = exampleVector[1][0] / vectorV[1][0]
+									} else {
+										scaleV = 0
+									}
+								}
+							} else {
+								[[scaleW], [scaleV]] = pointVectorMatrixMultiply(exampleVector, invert2By2Matrix(vectorsToMatrix(vectorW, vectorV)))
+							}
+
+							return (
+								<div className="f3 flex items-center mb3">
+									(<span style={{ color: GREEN }}>{_.floor(scaleW, 2)}</span><span className="mh2">*</span><span style={{ color: BLUE }}>w</span>)
+									<span className="mh2">+</span>
+									(<span style={{ color: GREEN }}>{_.floor(scaleV, 2)}</span><span className="mh2">*</span><span style={{ color: PURPLE }}>v</span>)
+									<span className="mh2">=</span>
+									<SymbolicVector vector={exampleVector} options={{ color: GREEN }} />
+								</div>
+							)
+						})}
 					</div>
 				</div>
 			</div>

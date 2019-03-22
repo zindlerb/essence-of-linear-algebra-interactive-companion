@@ -19,7 +19,7 @@ class SymbolicVector extends Component {
 	}
 
 	render() {
-		const { vector, className = null, scale = 1, options = {}, stringVector = null } = this.props;
+		const { vector, className = null, scale = 1, options = {}, stringVector = null, onScrub = null } = this.props;
 		const { color = 'black' } = options
 		const totalRows =  vector.length;
 		const totalColumns = vector[0].length;
@@ -59,16 +59,19 @@ class SymbolicVector extends Component {
 					dimensionItem = stringVector[rowInd][colInd]
 				}
 				const { height, width } = getTextDimensions(dimensionItem, FONT)
+				if (onScrub) {
 
-				vectorItems.push(
-					<text
-						key={`${rowInd}_${colInd}`}
-						x={textX + (colInd * (itemWidth + COLUMN_SPACING)) + ((itemWidth - width) / 2)}
-						y={(textY + height) + (rowInd * (itemHeight + ROW_SPACING)) - BASELINE_HEIGHT}
-						style={{ font: FONT }}>
-						{item}
-					</text>
-				)
+				} else {
+        	vectorItems.push(
+						<text
+							key={`${rowInd}_${colInd}`}
+							x={textX + (colInd * (itemWidth + COLUMN_SPACING)) + ((itemWidth - width) / 2)}
+							y={(textY + height) + (rowInd * (itemHeight + ROW_SPACING)) - BASELINE_HEIGHT}
+							style={{ font: FONT }}>
+							{item}
+						</text>
+					)
+				}
 			})
 		})
 

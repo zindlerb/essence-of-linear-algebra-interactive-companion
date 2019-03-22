@@ -96,33 +96,42 @@ export const interpolateColors = (colorA, colorB, numberOfSteps) => {
 	return rgbSteps
 }
 
-// x = 100
-// y = 100
-// gridSize = 100
-// gridSpacing = 10
-
-// desired result
-// { x: 5, y: -5 }
 export const svgToVectorPoint = (x, y, gridSize, gridSpacing) => {
 	const svgToVectorTranslation = -(gridSize/2)
 	const svgToVectorScaling = 1 / (gridSize / gridSpacing)
 
+	return [
+		[(x + svgToVectorTranslation) * svgToVectorScaling],
+		[-((y + svgToVectorTranslation) * svgToVectorScaling)]
+	]
+}
+
+export const vectorToSvgPoint = (vector, gridSize, gridSpacing) => {
+	const [[x], [y]] = vector
+	const vectorToSvgTranslation = ((gridSize / gridSpacing) / 2)
+
 	return {
-  	x: (x + svgToVectorTranslation) * svgToVectorScaling,
-		y: -((y + svgToVectorTranslation) * svgToVectorScaling)
+  	x: (x + vectorToSvgTranslation) * gridSpacing,
+		y: (-y + vectorToSvgTranslation) * gridSpacing
 	}
 }
 
-window.svgToVectorPoint = svgToVectorPoint
-
-export const vectorToSvgPoint = (x, y, gridSize, gridSpacing) => {
-	const vectorToSvgTranslation = (gridSize/2)
-	const vectorToSvgScaling = (gridSize / gridSpacing)
-
-	return {
-  	x: (x * vectorToSvgScaling) + vectorToSvgTranslation,
-		y: ((-y * vectorToSvgScaling) + vectorToSvgTranslation)
-	}
+export const pointVectorMatrixMultiply = ([[x], [y]], [[a, b], [c, d]]) => {
+	return [
+		[(a * x) + (b * y)],
+		[(c * x) + (d * y)]
+	]
 }
 
-window.vectorToSvgPoint = vectorToSvgPoint
+export const vectorsToMatrix = ([[a], [b]], [[c], [d]]) => [[a, c], [b, d]]
+
+export const invert2By2Matrix = ([[a, b], [c, d]]) => {
+	return vectorScale([[d, -b], [-c, a]], 1/(a*d - b*c))
+}
+
+export const determinant2By2Matrix = ([[a, b], [c, d]]) => ((a*d) - (b*c))
+export const getVectorSlope = ([[dx], [dy]]) => {
+	// returns undefined for vertical line
+	if (dx === 0) return undefined
+	return (dy/dx)
+}
