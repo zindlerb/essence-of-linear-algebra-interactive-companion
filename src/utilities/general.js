@@ -135,3 +135,11 @@ export const getVectorSlope = ([[dx], [dy]]) => {
 	if (dx === 0) return undefined
 	return (dy/dx)
 }
+
+export const matrixVectorMultiplication = () => {
+
+}
+
+export const composeMatrices = () => {
+
+}

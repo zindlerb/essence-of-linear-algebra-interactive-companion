@@ -31,11 +31,19 @@ body, #root {
 }
 
 .interactive {
-  color: #00a3b7
+  color: #00a3b7;
+	fill: #00a3b7;
 }
 
 .pointer-none {
 	pointer-events: none;
+}
+
+.abs-center {
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 }
 
 /*
@@ -46,3 +54,6 @@ body, #root {
 	user-select: none;
 }
 */
+.overflow-x-auto {
+	overflow-x: auto;
+}

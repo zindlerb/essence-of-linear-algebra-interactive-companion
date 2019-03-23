@@ -11,6 +11,7 @@ import BasisVectorContainer from 'Root/containers/BasisVectorContainer'
 import AlternativeBasisVectorContainer from 'Root/containers/AlternativeBasisVectorContainer'
 import SpanContainer from 'Root/containers/SpanContainer'
 import LinearTransformationContainer from 'Root/containers/LinearTransformationContainer'
+import MatrixCompositionContainer from 'Root/containers/MatrixCompositionContainer'
 import globalStateService from 'Utilities/global_state_service'
 
 class App extends Component {
@@ -60,6 +61,9 @@ class App extends Component {
 
 				<h2>Linear transformations and matrices (<a href="https://youtu.be/kYB8IZa5AuE">video link</a>)</h2>
 				<LinearTransformationContainer />
+
+				<h2>Matrix multiplication as composition (<a href="https://youtu.be/XkY2DOUCWMU">video link</a>)</h2>
+				<MatrixCompositionContainer />
 			</div>
 		)
 	}

@@ -8,13 +8,16 @@ const getTransformString = (transformMatrix, gridSize) => {
 	return `translate(${gridSize/2}, ${gridSize/2}) matrix(${vec1Str}, ${vec2Str}, 0, 0) translate(-${gridSize/2}, -${gridSize/2})`
 }
 
-const CoordinateGrid = ({ size, gridSpacing, showGridlines=true, showLabels=true, transform=null }) => {
+const CoordinateGrid = ({
+	size, gridSpacing, opacity=1, showGridlines=true,
+	showLabels=true, gridLineColor=GRAY, transform=null
+}) => {
 	let currentX = 0
 	let currentY = 0
 	let gridLines = []
 	if (showGridlines) {
 		_.times(Math.floor(size / gridSpacing) + 1, ind => {
-			let color = ind === Math.floor(size / gridSpacing) / 2 ? BLACK : GRAY
+			let color = ind === Math.floor(size / gridSpacing) / 2 ? BLACK : gridLineColor
 			gridLines.push(<line key={`${ind}_v`} x1={currentX} y1={0} x2={currentX} y2={size} stroke={color} />)
 			gridLines.push(<line key={`${ind}_y`} x1={0} y1={currentY} x2={size} y2={currentY} stroke={color} />)
 			currentX += gridSpacing
@@ -55,7 +58,7 @@ const CoordinateGrid = ({ size, gridSpacing, showGridlines=true, showLabels=true
 	}
 
 	return (
-		<g transform={transform ? getTransformString(transform, size) : null}>
+		<g transform={transform ? getTransformString(transform, size) : null} opacity={opacity}>
 			<rect x={0} y={0} width={size} height={size} fill="transparent"/>
 			{
        	ifTrue(showLabels, () => ([

@@ -1,8 +1,7 @@
 [x] transform for coordinate grid
-[ ] scrubbers for symbolic vector
-[ ] show basis vectors
-	[ ] transform for vector renderer.
-	[ ] hide vector param
+[x] scrubbers for symbolic vector
+[x] show grayed out background grid
+[x] dotted underline on svg scubbers
 [ ]	watch video 4 again and think about additions
 [ ] complete video 4
 [ ] add text to sections
@@ -10,10 +9,16 @@
 [ ] clean up fonts and designs
 [ ] hovering on span dot should fade things in and out
 [ ] check for jank
+	[ ] scubbers kind of janky / buggy
 [ ] graceful mobile handling
 	[ ] gifs that say it is mobile only
 [ ] link to my twitter
-[ ]
+[ ] external link
+[ ] make it work on ipad
+[ ] check firefox, safari
+[ ] post
+
+should alternate basis vectors have a diff backing coordinate system?
 
 
 At video 4 clean up whole post

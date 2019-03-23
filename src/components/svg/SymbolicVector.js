@@ -1,7 +1,8 @@
 import cx from 'classnames'
 import PT from 'prop-types';
 import React, { Component } from 'react'
-import { getTextDimensions } from '../../utilities/general.js'
+import Scrubber from 'Components/Scrubber'
+import { getTextDimensions } from 'Utilities/general.js'
 
 const BRACKET_THICKNESS = 3
 const VECTOR_INSET = 10
@@ -60,18 +61,26 @@ class SymbolicVector extends Component {
 				}
 				const { height, width } = getTextDimensions(dimensionItem, FONT)
 				if (onScrub) {
-
-				} else {
-        	vectorItems.push(
-						<text
-							key={`${rowInd}_${colInd}`}
-							x={textX + (colInd * (itemWidth + COLUMN_SPACING)) + ((itemWidth - width) / 2)}
-							y={(textY + height) + (rowInd * (itemHeight + ROW_SPACING)) - BASELINE_HEIGHT}
-							style={{ font: FONT }}>
+					item = (
+						<Scrubber
+							className="interactive"
+							isSvg={true}
+							sensitivity={20}
+							onChange={(val) => onScrub({ value: val, row: rowInd, col: colInd }) }>
 							{item}
-						</text>
+						</Scrubber>
 					)
 				}
+
+				vectorItems.push(
+					<text
+						key={`${rowInd}_${colInd}`}
+						x={textX + (colInd * (itemWidth + COLUMN_SPACING)) + ((itemWidth - width) / 2)}
+						y={(textY + height) + (rowInd * (itemHeight + ROW_SPACING)) - BASELINE_HEIGHT}
+						style={{ font: FONT }}>
+						{item}
+					</text>
+				)
 			})
 		})
 

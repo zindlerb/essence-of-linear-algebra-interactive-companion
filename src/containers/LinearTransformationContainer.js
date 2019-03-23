@@ -34,15 +34,31 @@ class LinearTransformationContainer extends Component {
 			<div className="span-container mv4 flex items-center">
 				<SvgContainer size={GRID_SIZE}>
 					<CoordinateGrid
+						opacity={0.7}
+						size={GRID_SIZE}
+						gridSpacing={GRID_SPACING}
+						showGridlines={true}
+						showLabels={false}
+					/>
+					<CoordinateGrid
+						gridLineColor={'#7cb9e4'}
 						transform={transformMatrix}
 						size={GRID_SIZE}
 						gridSpacing={GRID_SPACING}
 						showGridlines={true}
-						showLabels={true}
+						showLabels={false}
 					/>
 				</SvgContainer>
 				<div className="ml4 flex items-center">
-					<SymbolicVector className="mr2" vector={transformMatrix} />
+					<SymbolicVector
+						className="mr2"
+						vector={transformMatrix}
+						onScrub={({ value, row, col }) => {
+							const newTMatrix = _.cloneDeep(transformMatrix)
+							newTMatrix[row][col] = value
+							this.setState({ transformMatrix: newTMatrix })
+						}}
+					/>
 					<SymbolicVector vector={[['x'], ['y']]} />
 				</div>
 			</div>
