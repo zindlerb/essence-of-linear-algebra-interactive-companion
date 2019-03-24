@@ -1,22 +1,18 @@
-[x] transform for coordinate grid
-[x] scrubbers for symbolic vector
-[x] show grayed out background grid
-[x] dotted underline on svg scubbers
-[ ]	watch video 4 again and think about additions
-[ ] complete video 4
-[ ] add text to sections
-	[ ] add unofficial
-[ ] clean up fonts and designs
-[ ] hovering on span dot should fade things in and out
-[ ] check for jank
-	[ ] scubbers kind of janky / buggy
-[ ] graceful mobile handling
-	[ ] gifs that say it is mobile only
-[ ] link to my twitter
+[x] abstract equation for vector multiplication
+[x] colors for vector multiplication
+[x] add text to each section
+[x] fix scrubbers to work better
 [ ] external link
-[ ] make it work on ipad
-[ ] check firefox, safari
-[ ] post
+[ ] italics for variables
+[ ] colors for variables in text
+[ ] skew the coordinate grid for alternate basis vectors?
+	[ ] no to match the tutorial
+[ ] mobile
+[ ] firefox, safari
+[ ] ipad handling
+
+blog post:
+	how do closures in js work?
 
 should alternate basis vectors have a diff backing coordinate system?
 

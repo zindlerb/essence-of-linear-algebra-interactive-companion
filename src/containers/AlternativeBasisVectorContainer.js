@@ -17,7 +17,7 @@ class BasisVectorContainer extends Component {
 			scaleV: -1,
 		}
 	}
-	// { color, onMove, hasMovingHandle, hasScalingHandle, onScale,  }
+
 	render() {
 		const { vectorW, vectorV, scaleW, scaleV } = this.state
 

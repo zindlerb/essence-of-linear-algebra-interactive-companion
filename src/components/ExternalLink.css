@@ -1,0 +1,11 @@
+.external-link {
+	text-decoration: none;
+}
+
+.external-link .fa-external-link-alt {
+	font-size: 80%;
+}
+
+.external-link:hover {
+	opacity: 0.7;
+}

@@ -15,61 +15,81 @@ class VectorScalingContainer extends Component {
 			scalar: 2,
 		}
 	}
-	// { color, onMove, hasMovingHandle, hasScalingHandle, onScale,  }
+
 	render() {
 		const { vector, scalar } = this.state
 		return (
-			<div className="vector-scaling-container flex mv4 w-100 justify-between">
-				<SvgContainer size={400}>
-					<CoordinateGraph
-						vectors={[
-							vectorScale(vector, scalar),
-							vector,
-						]}
-						vectorOptions={[
-							{
-								color: BLUE,
-							},
-							{
-								color: SHADOW_BLUE,
-								onMove: ({ newX, newY }) => {
-									this.setState({
-	                	vector: [
-											[newX],
-											[newY]
-										]
-									})
-								}
-							},
-						]}
-						size={400}
-						gridSpacing={20}
-					/>
-				</SvgContainer>
+			<div className="vector-scaling-container">
+				<p>Here is the abstract equation for vector scaling.</p>
 				<div className="flex items-center">
-					<SymbolicVector
-						className="ph2"
-						vector={vector}
-					/>
+					<span className="f2">s</span>
 					<div className="operator mh2">*</div>
-					<Scrubber
-						className="scalar"
-						onChange={(scalar) => this.setState({ scalar })}>
-						{scalar}
-					</Scrubber>
+					<SymbolicVector
+						vector={[['x'], ['y']]}
+					/>
 					<div className="operator mh2">=</div>
 					<SymbolicVector
-						className="ph2"
 						vector={[
-							[`${scalar} * ${vector[0][0]}`],
-							[`${scalar} * ${vector[1][0]}`],
+							[`s * x`],
+							[`s * y`],
 						]}
 					/>
-					<div className="operator mh2">=</div>
-					<SymbolicVector
-						className="ph2"
-						vector={vectorScale(vector, scalar)}
-					/>
+				</div>
+				<p>Below is an example of multiplying two vectors. The light blue is the vector before being scaled. The dark blue vector is after it has been scaled. You can drag the scalar with the dotted underline on the right.</p>
+				<div className="flex mv4 w-100 justify-between">
+					<SvgContainer size={400}>
+						<CoordinateGraph
+							vectors={[
+								vectorScale(vector, scalar),
+								vector,
+							]}
+							vectorOptions={[
+								{
+									color: BLUE,
+								},
+								{
+									color: SHADOW_BLUE,
+									onMove: ({ newX, newY }) => {
+										this.setState({
+		                	vector: [
+												[newX],
+												[newY]
+											]
+										})
+									}
+								},
+							]}
+							size={400}
+							gridSpacing={20}
+						/>
+					</SvgContainer>
+					<div className="flex items-center">
+						<Scrubber
+							className="scalar interactive"
+							onChange={(scalar) => this.setState({ scalar })}>
+							{scalar}
+						</Scrubber>
+						<div className="operator mh2">*</div>
+						<SymbolicVector
+							options={{color: SHADOW_BLUE}}
+							className="ph2"
+							vector={vector}
+						/>
+						<div className="operator mh2">=</div>
+						<SymbolicVector
+							className="ph2"
+							vector={[
+								[`${scalar} * ${vector[0][0]}`],
+								[`${scalar} * ${vector[1][0]}`],
+							]}
+						/>
+						<div className="operator mh2">=</div>
+						<SymbolicVector
+							options={{color: BLUE}}
+							className="ph2"
+							vector={vectorScale(vector, scalar)}
+						/>
+					</div>
 				</div>
 			</div>
 		)

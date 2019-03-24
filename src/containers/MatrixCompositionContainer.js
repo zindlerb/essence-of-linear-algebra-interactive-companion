@@ -3,6 +3,15 @@ import MatrixTransformationEditor from 'Components/MatrixTransformationEditor'
 import SvgContainer from 'Components/svg/SvgContainer'
 import CoordinateGrid from 'Components/svg/CoordinateGrid'
 
+/*
+	ON HOLD FOR NOW:
+		EASY NEXT STEPS:
+			each vector in the composition editor has a scrubber
+		HARD:
+			Directly manipulate vector next transformation. Is there just one matrix for a given transformation? (no).
+			How to reduce the matrix to smallest transform?
+*/
+
 const GRID_SIZE = 420
 const GRID_SPACING = 30
 
@@ -67,11 +76,5 @@ class MatrixCompositionContainer extends Component {
 		)
 	}
 }
-
-// first: show only vector
-// else:
-//   show current vector - how to map the movements back
-//     what matrix, applied to this vector gets this vector.
-//   for prev vectors - compose matrices, do matrix multiplication
 
 export default MatrixCompositionContainer

@@ -37,17 +37,23 @@ class BasisVectorContainer extends Component {
 						/>
 					</SvgContainer>
 					<div className="f1 ml4 flex items-center">
-						<span
-							style={{ color: X_COMPONENT_COLOR }}>
-							(<Scrubber onChange={(newVal) => this.setState({ vector: [[newVal], [vector[1][0]]] })}>{vector[0][0]}</Scrubber>){I_HAT}
-						</span>
+						<Scrubber
+							className="interactive"
+							onChange={(newVal) => this.setState({ vector: [[newVal], [vector[1][0]]] })}>
+							{vector[0][0]}
+						</Scrubber>
+						<span className="mh2">*</span>
+						<span style={{ color: X_COMPONENT_COLOR }}>{I_HAT}</span>
 						<span className="mh3">+</span>
-						<span
-							style={{ color: Y_COMPONENT_COLOR }}>
-							(<Scrubber onChange={(newVal) => this.setState({ vector: [[vector[0][0]], [newVal]] })}>{vector[1][0]}</Scrubber>){J_HAT}
-						</span>
+						<Scrubber
+							className="interactive"
+							onChange={(newVal) => this.setState({ vector: [[vector[0][0]], [newVal]] })}>
+							{vector[1][0]}
+						</Scrubber>
+						<span className="mh2">*</span>
+						<span style={{ color: Y_COMPONENT_COLOR }}>{J_HAT}</span>
 						<span className="mh3">=</span>
-						<SymbolicVector vector={vector} />
+						<SymbolicVector vector={vector} options={{ color: BLUE }} />
 					</div>
 				</div>
 			</div>

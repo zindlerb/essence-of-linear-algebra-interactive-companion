@@ -54,9 +54,11 @@ class LinearTransformationContainer extends Component {
 						className="mr2"
 						vector={transformMatrix}
 						onScrub={({ value, row, col }) => {
-							const newTMatrix = _.cloneDeep(transformMatrix)
-							newTMatrix[row][col] = value
-							this.setState({ transformMatrix: newTMatrix })
+							if (this.state.transformMatrix[row][col] !== value) {
+								const newTMatrix = _.cloneDeep(transformMatrix)
+								newTMatrix[row][col] = value
+								this.setState({ transformMatrix: newTMatrix })
+							}
 						}}
 					/>
 					<SymbolicVector vector={[['x'], ['y']]} />

@@ -65,7 +65,7 @@ class SymbolicVector extends Component {
 						<Scrubber
 							className="interactive"
 							isSvg={true}
-							sensitivity={20}
+							sensitivity={15}
 							onChange={(val) => onScrub({ value: val, row: rowInd, col: colInd }) }>
 							{item}
 						</Scrubber>
