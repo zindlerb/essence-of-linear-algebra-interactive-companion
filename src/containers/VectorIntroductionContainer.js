@@ -15,7 +15,7 @@ class VectorIntroductionContainer extends Component {
 	render() {
 		const { vector } = this.state
 		return (
-			<div className="flex mv4">
+			<div className="flex">
 				<SvgContainer size={420}>
 					<CoordinateGraph
 						showGridlines={false}

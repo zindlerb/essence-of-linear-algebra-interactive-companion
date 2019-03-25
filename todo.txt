@@ -1,15 +1,27 @@
+optimal text width calculator website
+
+
 [x] abstract equation for vector multiplication
 [x] colors for vector multiplication
 [x] add text to each section
 [x] fix scrubbers to work better
-[ ] external link
-[ ] italics for variables
-[ ] colors for variables in text
-[ ] skew the coordinate grid for alternate basis vectors?
-	[ ] no to match the tutorial
-[ ] mobile
+[x] external link
+[x] italics for variables
+[x] colors for variables in text
+[x] alternate basis vectors should have a vector
+[x] span container both grow when dragging
+[x] tweak styles - font size, font color ect
+	[x] text width
+	[x] text spacing
+[ ] review copy. read 3 times un distracted.
+	[ ] copy about how many are complete
+	[ ] author (twitter icon next to it), date
 [ ] firefox, safari
 [ ] ipad handling
+[ ] mobile
+	[ ] generic not handling mobile text
+[ ] write lib to use with different fonts
+[ ] put on site
 
 blog post:
 	how do closures in js work?

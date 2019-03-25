@@ -20,11 +20,13 @@ class SymbolicVector extends Component {
 	}
 
 	render() {
-		const { vector, className = null, scale = 1, options = {}, stringVector = null, onScrub = null } = this.props;
+		const { vector, className=null, scale=1, options={}, stringVector=null, onScrub=null, italic=false } = this.props;
 		const { color = 'black' } = options
 		const totalRows =  vector.length;
 		const totalColumns = vector[0].length;
 		const vectorItems = []
+
+		const FONT = italic ? 'italic 30px sans-serif' : '30px sans-serif'
 
 		let itemWidth = 0
 		let itemHeight = 0

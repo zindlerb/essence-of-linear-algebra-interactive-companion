@@ -31,7 +31,7 @@ class LinearTransformationContainer extends Component {
 		const { transformMatrix } = this.state
 
 		return (
-			<div className="span-container mv4 flex items-center">
+			<div className="span-container flex items-center">
 				<SvgContainer size={GRID_SIZE}>
 					<CoordinateGrid
 						opacity={0.7}

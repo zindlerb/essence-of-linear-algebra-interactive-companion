@@ -47,7 +47,7 @@ class SpanContainer extends Component {
 		}
 
 		return (
-			<div className="span-container mv4 ">
+			<div className="span-container">
 				<div className="flex">
 					<SvgContainer size={GRID_SIZE}>
 						<CoordinateGrid
@@ -72,10 +72,10 @@ class SpanContainer extends Component {
 					</SvgContainer>
 					<div className="ml4 pt4">
 						<div className="f3 flex items-center mb3">
-							w <span className="mh2">=</span> <SymbolicVector vector={vectorW} options={{ color: BLUE }} />
+							<span className="i">w</span> <span className="mh2">=</span> <SymbolicVector vector={vectorW} options={{ color: BLUE }} />
 						</div>
 						<div className="f3 flex items-center mb3">
-							v <span className="mh2">=</span> <SymbolicVector vector={vectorV} options={{ color: PURPLE }} />
+							<span className="i">v</span> <span className="mh2">=</span> <SymbolicVector vector={vectorV} options={{ color: PURPLE }} />
 						</div>
 						{ifTrue(exampleVector, () => {
 							const matrix = vectorsToMatrix(vectorW, vectorV)

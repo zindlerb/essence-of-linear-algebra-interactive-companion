@@ -20,11 +20,12 @@ class VectorAdditionContainer extends Component {
 	render() {
 		const { vectorA, vectorB } = this.state
 		return (
-			<div className="vector-addition-container mv4">
+			<div className="vector-addition-container">
 				<div className="mb2">
 					<p>Here is the abstract equation for vector addition.</p>
 					<div className="mt2 mb4 flex items-center">
 						<SymbolicVector
+							italic={true}
 							scale={SYMBOLIC_VECTOR_SCALING}
 							vector={[
 								['x1'],
@@ -33,6 +34,7 @@ class VectorAdditionContainer extends Component {
 						/>
 						<div className="operator-small mh2">+</div>
 						<SymbolicVector
+							italic={true}
 							scale={SYMBOLIC_VECTOR_SCALING}
 							vector={[
 								['x2'],
@@ -43,6 +45,10 @@ class VectorAdditionContainer extends Component {
 						<SymbolicVector
 							scale={SYMBOLIC_VECTOR_SCALING}
 							vector={[
+								[<tspan><tspan className="i">x1</tspan> + <tspan className="i">x2</tspan></tspan>],
+								[<tspan><tspan className="i">y1</tspan> + <tspan className="i">y2</tspan></tspan>]
+							]}
+							stringVector={[
 								['x1 + x2'],
 								['y1 + y2']
 							]}

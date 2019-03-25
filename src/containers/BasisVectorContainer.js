@@ -17,7 +17,7 @@ class BasisVectorContainer extends Component {
 	render() {
 		const { vector } = this.state
 		return (
-			<div className="vector-addition-container mv4 ">
+			<div className="vector-addition-container">
 				<div className="flex items-center">
 					<SvgContainer size={420}>
 						<CoordinateGraph

@@ -22,21 +22,26 @@ class VectorScalingContainer extends Component {
 			<div className="vector-scaling-container">
 				<p>Here is the abstract equation for vector scaling.</p>
 				<div className="flex items-center">
-					<span className="f2">s</span>
+					<span className="f2 i">s</span>
 					<div className="operator mh2">*</div>
 					<SymbolicVector
+						italic={true}
 						vector={[['x'], ['y']]}
 					/>
 					<div className="operator mh2">=</div>
 					<SymbolicVector
 						vector={[
-							[`s * x`],
-							[`s * y`],
+							[<tspan><tspan className="i">s</tspan> * <tspan className="i">x</tspan></tspan>],
+							[<tspan><tspan className="i">s</tspan> * <tspan className="i">y</tspan></tspan>]
+						]}
+						stringVector={[
+							['s * x'],
+							['s * y']
 						]}
 					/>
 				</div>
 				<p>Below is an example of multiplying two vectors. The light blue is the vector before being scaled. The dark blue vector is after it has been scaled. You can drag the scalar with the dotted underline on the right.</p>
-				<div className="flex mv4 w-100 justify-between">
+				<div className="flex w-100 justify-between">
 					<SvgContainer size={400}>
 						<CoordinateGraph
 							vectors={[

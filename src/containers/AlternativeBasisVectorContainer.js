@@ -4,8 +4,8 @@ import SvgContainer from 'Components/svg/SvgContainer'
 import CoordinateGraph from 'Components/svg/CoordinateGraph'
 import { I_HAT, J_HAT } from 'Root/constants.js'
 import Scrubber from 'Components/Scrubber'
-import { vectorScale } from 'Utilities/general'
-import { BLUE, SHADOW_BLUE, PURPLE, SHADOW_PURPLE } from 'Root/constants/colors'
+import { vectorScale, vectorAdd } from 'Utilities/general'
+import { BLUE, SHADOW_BLUE, PURPLE, SHADOW_PURPLE, GREEN } from 'Root/constants/colors'
 
 class BasisVectorContainer extends Component {
 	constructor(props) {
@@ -22,7 +22,7 @@ class BasisVectorContainer extends Component {
 		const { vectorW, vectorV, scaleW, scaleV } = this.state
 
 		return (
-			<div className="vector-addition-container mv4 ">
+			<div className="vector-addition-container">
 				<div className="flex items-center">
 					<SvgContainer size={420}>
 						<CoordinateGraph
@@ -31,13 +31,15 @@ class BasisVectorContainer extends Component {
 								vectorW,
 								vectorV,
 								vectorScale(vectorW, scaleW),
-								vectorScale(vectorV, scaleV)
+								vectorScale(vectorV, scaleV),
+								vectorAdd(vectorScale(vectorW, scaleW), vectorScale(vectorV, scaleV))
 							]}
 							vectorOptions={[
 								{ color: SHADOW_BLUE },
 								{ color: SHADOW_PURPLE },
 								{ color: BLUE },
-								{ color: PURPLE },
+								{ color: PURPLE, origin: { x: vectorScale(vectorW, scaleW)[0][0], y: vectorScale(vectorW, scaleW)[1][0] }},
+								{ color: GREEN },
 							]}
 							size={420}
 							gridSpacing={30}
@@ -45,17 +47,17 @@ class BasisVectorContainer extends Component {
 					</SvgContainer>
 					<div className="ml4">
 						<div className="f3 flex items-center mb3">
-							w <span className="mh2">=</span> <SymbolicVector vector={vectorW} options={{ color: BLUE }} />
+							<span className="i">w</span> <span className="mh2">=</span> <SymbolicVector vector={vectorW} options={{ color: BLUE }} />
 						</div>
 						<div className="f3 flex items-center mb3">
-							v <span className="mh2">=</span> <SymbolicVector vector={vectorV} options={{ color: PURPLE }} />
+							<span className="i">v</span> <span className="mh2">=</span> <SymbolicVector vector={vectorV} options={{ color: PURPLE }} />
 						</div>
 						<div className="f2 flex items-center">
 							<span>
 								(
 									<Scrubber className="interactive" onChange={(scaleW) => this.setState({ scaleW })}>{scaleW}</Scrubber>
 									<span className="mh2">*</span>
-									<span style={{ color: BLUE }}>w</span>
+									<span className="i" style={{ color: BLUE }}>w</span>
 								)
 							</span>
 							<span className="mh2">+</span>
@@ -65,11 +67,11 @@ class BasisVectorContainer extends Component {
 										className="interactive"
 										onChange={(scaleV) => this.setState({ scaleV })}>{scaleV}</Scrubber>
 										<span className="mh2">*</span>
-										<span style={{ color: PURPLE }}>v</span>
+										<span className="i" style={{ color: PURPLE }}>v</span>
 								)
 							</span>
 							<span className="mh2">=</span>
-							<SymbolicVector vector={[[scaleW], [scaleV]]} />
+							<SymbolicVector vector={[[scaleW], [scaleV]]} options={{ color: GREEN }} />
 						</div>
 					</div>
 				</div>

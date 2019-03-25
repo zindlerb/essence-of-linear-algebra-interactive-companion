@@ -19,9 +19,9 @@ class DragHandle extends Component {
 				className={cx('drag-handle', { 'c-grab': !isDragging, 'c-grabbing': isDragging })}
 				cx={pos.x}
 				cy={pos.y}
-				r={(isHovering || isDragging) ? 10 : 9}
+				r={(isHovering || isDragging) ? 12 : 9}
 				fill={color}
-				stroke="white"
+				stroke="#f5f5f7"
 				strokeWidth={3}
 				onMouseEnter={() => this.setState({ isHovering: true })}
 				onMouseLeave={() => this.setState({ isHovering: false })}
