@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import { interpolateColors, vectorToSvgPoint, svgToVectorPoint, getVectorSlope } from 'Utilities/general'
 
