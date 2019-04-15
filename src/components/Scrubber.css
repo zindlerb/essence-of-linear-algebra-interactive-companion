@@ -1,9 +1,0 @@
-.scrubber {
-	text-decoration-line: underline;
-	text-decoration-style: dashed;
-	cursor: ew-resize;
-}
-
-.scrubber:hover {
-	opacity: .7;
-}
