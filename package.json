@@ -2,6 +2,7 @@
   "name": "tidy_prototype",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://www.zindlerb.com/essence-of-linear-algebra-interactive-companion",
   "dependencies": {
     "autoprefixer": "7.1.6",
     "babel-core": "6.26.0",
